@@ -15,14 +15,12 @@ export function HeroSection() {
 
       <div className="relative z-10 mx-auto max-w-5xl text-center pt-20 sm:pt-24 md:pt-28 pb-8 sm:pb-12 w-full">
         {/* Badge */}
-        <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-accent/10 border border-accent/20 text-xs sm:text-sm text-accent mb-6 sm:mb-8">
-          <span className="relative flex h-1.5 w-1.5 sm:h-2 sm:w-2">
+        <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 rounded-full bg-accent/10 border border-accent/20 text-xs sm:text-sm text-accent mb-6 sm:mb-8 max-w-full text-wrap text-center">
+          <span className="relative flex h-1.5 w-1.5 sm:h-2 sm:w-2 shrink-0">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
             <span className="relative inline-flex rounded-full h-1.5 w-1.5 sm:h-2 sm:w-2 bg-accent"></span>
           </span>
-          <span className="truncate max-w-[200px] sm:max-w-none">
-            {HERO.badge.text}
-          </span>
+          <span>{HERO.badge.text}</span>
         </div>
 
         {/* Main Heading */}

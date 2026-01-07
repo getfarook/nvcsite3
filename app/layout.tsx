@@ -11,10 +11,68 @@ const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "NOVIZCO INFOTECH - Technology Solutions & Innovation",
+  metadataBase: new URL("https://novizco.com"),
+  title: {
+    default: "NOVIZCO INFOTECH - Technology Solutions & Innovation",
+    template: "%s | NOVIZCO INFOTECH",
+  },
   description:
-    "Leading technology services company in India specializing in Web & Mobile App Development, Flutter, UI/UX Design, AI Labs, and Cloud Solutions",
-  generator: "v0.app",
+    "Leading technology services company in India specializing in Web & Mobile App Development, Flutter, UI/UX Design, AI Labs, and Cloud Solutions.",
+  keywords: [
+    "Technology Solutions",
+    "Web Development",
+    "Mobile App Development",
+    "Flutter Development",
+    "UI/UX Design",
+    "AI Labs",
+    "Cloud Solutions",
+    "Novizco Infotech",
+    "India",
+  ],
+  authors: [{ name: "Novizco Infotech" }],
+  creator: "Novizco Infotech",
+  publisher: "Novizco Infotech",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  openGraph: {
+    title: "NOVIZCO INFOTECH - Technology Solutions & Innovation",
+    description:
+      "Leading technology services company in India specializing in Web & Mobile App Development, Flutter, UI/UX Design, AI Labs, and Cloud Solutions.",
+    url: "https://novizco.com",
+    siteName: "NOVIZCO INFOTECH",
+    images: [
+      {
+        url: "/og-image.png", // Ensure you have a default OG image
+        width: 1200,
+        height: 630,
+        alt: "NOVIZCO INFOTECH",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "NOVIZCO INFOTECH",
+    description:
+      "Leading technology services company in India specializing in Web & Mobile App Development, Flutter, UI/UX Design.",
+    images: ["/og-image.png"], // Reuse OG image or specific twitter image
+    creator: "@novizco", // Replace with valid handle or remove
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   icons: {
     icon: [
       {
@@ -36,6 +94,10 @@ export const metadata: Metadata = {
     apple: "/apple-icon.png",
     shortcut: "/icon-light-32x32.png",
   },
+  manifest: "/site.webmanifest",
+  alternates: {
+    canonical: "/",
+  },
 };
 
 export default function RootLayout({
@@ -53,9 +115,9 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <ScatteredBackground />
-          {children}
-          {/* <AiNodesSideMargins />
-          <div className="lg:px-20">{children}</div> */}
+          {/* {children} */}
+          <AiNodesSideMargins />
+          <div className="lg:px-[5%]">{children}</div>
           <Analytics />
         </ThemeProvider>
       </body>

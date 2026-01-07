@@ -52,9 +52,6 @@ export function ContactSection() {
                   <p className="text-sm text-muted-foreground">
                     info@novizco.com
                   </p>
-                  <p className="text-sm text-muted-foreground">
-                    support@novizco.com
-                  </p>
                 </div>
               </div>
             </Card>
@@ -67,10 +64,10 @@ export function ContactSection() {
                 <div>
                   <h3 className="font-semibold mb-1">Phone</h3>
                   <p className="text-sm text-muted-foreground">
-                    +91 98765 43210
+                    +91 95677 34622
                   </p>
                   <p className="text-sm text-muted-foreground">
-                    +91 87654 32109
+                    +91 89214 18593
                   </p>
                 </div>
               </div>
@@ -84,9 +81,14 @@ export function ContactSection() {
                 <div>
                   <h3 className="font-semibold mb-1">Location</h3>
                   <p className="text-sm text-muted-foreground">
-                    Bangalore, Karnataka
+                    NOVIZCO INFOTECH PVT. LTD.
                   </p>
-                  <p className="text-sm text-muted-foreground">India</p>
+                  <p className="text-sm text-muted-foreground">
+                    B&M Business Center, Kakkanad
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    Kochi, India – 682030
+                  </p>
                 </div>
               </div>
             </Card>

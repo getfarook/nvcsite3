@@ -21,12 +21,6 @@ export interface TimelineItem {
   description: string;
 }
 
-export interface TeamMember {
-  name: string;
-  role: string;
-  description: string;
-}
-
 export interface Stat {
   value: string;
   label: string;
@@ -109,30 +103,6 @@ export const TIMELINE: TimelineItem[] = [
     title: "Future Ready",
     description:
       "Continuing to innovate and lead the digital transformation journey for 500+ clients.",
-  },
-];
-
-// Team departments
-export const TEAM: TeamMember[] = [
-  {
-    name: "Leadership Team",
-    role: "15+ Years Combined Experience",
-    description: "Visionary leaders driving innovation and excellence",
-  },
-  {
-    name: "Engineering Team",
-    role: "30+ Expert Developers",
-    description: "Building scalable, robust solutions with cutting-edge tech",
-  },
-  {
-    name: "Design Team",
-    role: "12+ Creative Designers",
-    description: "Crafting beautiful, user-centric experiences",
-  },
-  {
-    name: "Operations Team",
-    role: "Client Success Specialists",
-    description: "Ensuring seamless project delivery and support",
   },
 ];
 

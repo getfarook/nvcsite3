@@ -5,6 +5,7 @@
 
 :root {
   /* Brand Color */
+  --scroll-text-rgb: 0, 0, 0;
   --brand-primary: oklch(0.55 0.25 280);
   /* Vivid Indigo/Purple to match logo feel */
   --gradient-blue: oklch(0.6 0.2 240);
@@ -58,6 +59,7 @@
 
 .dark {
   /* Pure black background like Next.js */
+  --scroll-text-rgb: 255, 255, 255;
   --background: oklch(0 0 0);
   /* Pure white foreground */
   --foreground: oklch(1 0 0);

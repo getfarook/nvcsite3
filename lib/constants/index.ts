@@ -13,6 +13,8 @@ import {
   Linkedin,
   Twitter,
   ArrowRight,
+  Facebook,
+  Youtube,
 } from "lucide-react";
 import ReactLogo from "@/components/icons/react.svg";
 import NextLogo from "@/components/icons/nextjs2.svg";
@@ -31,7 +33,7 @@ export const COMPANY = {
   logo: "/images/novizco-logo.png",
   tagline: "Technology Solutions & Innovation",
   description:
-    "Building the future of technology with innovative solutions. Your trusted partner for digital transformation.",
+    "We are a reliable, fast delivering and high performance technology partner for our valuable customers across multiple verticals like Healthcare, Petroleum, Finance, Construction, Retail, Travel and Tourism, Logistics etc.",
   year: new Date().getFullYear(),
 } as const;
 
@@ -74,9 +76,22 @@ export const TECH_STACK: TechStackItem[] = [
  * Social Media Links
  */
 export const SOCIAL_LINKS = {
-  twitter: { href: "#", icon: Twitter, label: "Twitter" },
-  linkedin: { href: "#", icon: Linkedin, label: "LinkedIn" },
-  github: { href: "#", icon: Github, label: "GitHub" },
+  facebook: {
+    href: "https://www.facebook.com/novizco/",
+    icon: Facebook,
+    label: "Facebook",
+  },
+  linkedin: {
+    href: "https://www.linkedin.com/company/novizco/",
+    icon: Linkedin,
+    label: "LinkedIn",
+  },
+  twitter: { href: "https://twitter.com", icon: Twitter, label: "Twitter" },
+  youtube: {
+    href: "https://www.youtube.com/c/Novizcoinfo",
+    icon: Youtube,
+    label: "YouTube",
+  },
 } as const;
 
 /**
@@ -89,11 +104,12 @@ export const FOOTER = {
     { label: "Contact", sectionId: "contact" },
   ],
   services: [
-    "Web Development",
-    "Mobile Apps",
-    "UI/UX Design",
-    "AI Solutions",
-    "Cloud Services",
+    "Web Application Development",
+    "Mobile App Development",
+    "UI/UX Designing",
+    "Cloud Platform Consulting",
+    "Digital Content Designing",
+    "Artificial Intelligence",
   ],
   legal: [
     { href: "#", label: "Privacy Policy" },
@@ -106,15 +122,15 @@ export const FOOTER = {
  */
 export const HERO = {
   badge: {
-    text: "Technology Solutions & Innovation",
+    text: "Web and Mobile Application Development Experts in India",
     icon: "pulse",
   },
   title: {
-    prefix: "Build the Future with",
-    highlight: "NOVIZCO INFOTECH",
+    prefix: "Your Perfect Partner for",
+    highlight: "Technology Solutions",
   },
   description:
-    "We deliver cutting-edge technology solutions that transform businesses. From web and mobile development to AI innovation and cloud expertise.",
+    "NOVIZCO is a technology services company focused on Web Applications, Mobile Applications, UI UX and Cloud Platform Services. We are full stack development experts on technologies like Flutter, React Native, ReactJS, Go, NodeJS, Amazon AWS and Google Cloud Platform.",
   ctas: [
     {
       label: "Start Your Project",
@@ -144,19 +160,19 @@ export const HERO = {
 export const SCROLL_REVEAL = {
   sections: [
     {
-      text: "We believe technology should enhance ",
+      text: "We are a reliable, fast delivering and high performance ",
       speed: 1.7, // normal speed
     },
     {
-      text: "your daily experiences. Our mission is to ",
+      text: "technology partner for our valuable customers. ",
       speed: 3.2, // faster speed
     },
     {
-      text: "turn that belief into action!",
+      text: "Adopt the latest technologies into your business.",
       speed: 1.7, // normal speed
     },
   ],
-  scrollHeight: "300vh",
+  scrollHeight: "150vh",
   revealOpacity: {
     revealed: 1,
     hidden: 0.2,
@@ -174,9 +190,9 @@ export const SERVICES = {
   items: [
     {
       icon: Code,
-      title: "Web Development",
+      title: "Web Application Development",
       description:
-        "Build scalable, high-performance web applications using modern frameworks and best practices. Full-stack solutions tailored to your business needs.",
+        "We are a full-stack web application development company strongly striving to create extra smart and reliable web applications that are well-tailored to your business needs.",
       features: [
         "React & Next.js",
         "Node.js Backend",
@@ -186,9 +202,9 @@ export const SERVICES = {
     },
     {
       icon: Smartphone,
-      title: "Mobile App Development",
+      title: "Mobile Application Development",
       description:
-        "Cross-platform mobile applications with Flutter. Native performance, beautiful UI, and seamless user experiences across iOS and Android.",
+        "Your Perfect Technology Partner in Building Futuristic Mobile Apps with Flutter and other top Frameworks. The world runs on smartphones.",
       features: [
         "Flutter Development",
         "Native Performance",
@@ -198,9 +214,9 @@ export const SERVICES = {
     },
     {
       icon: Palette,
-      title: "UI/UX Design",
+      title: "UI/UX Designing",
       description:
-        "User-centric design that combines aesthetics with functionality. Create intuitive interfaces that delight users and drive engagement.",
+        "Do you want to build sleek, intuitive and compelling UI/UX Designs that create everlasting impact for your applications? Switch to NOVIZCO’s design expertise.",
       features: [
         "User Research",
         "Wireframing",

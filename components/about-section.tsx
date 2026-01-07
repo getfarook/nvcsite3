@@ -14,20 +14,19 @@ export function AboutSection() {
               About NOVIZCO INFOTECH
             </h2>
             <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-              We are a leading Indian technology services company dedicated to
-              delivering innovative digital solutions that drive business growth
-              and transformation.
+              We are a reliable, fast delivering and high performance technology
+              partner for our valuable customers across multiple verticals like
+              Healthcare, Petroleum, Finance, Construction, Retail, Travel and
+              Tourism, Logistics etc.
             </p>
             <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-              With expertise spanning web and mobile development, UI/UX design,
-              artificial intelligence, and cloud computing, we help businesses
-              navigate the complexities of modern technology.
+              Outsource your technology requirements to us and you can focus on
+              core business to reduce production, operational and human resource
+              cost.
             </p>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              Our team of passionate engineers, designers, and strategists work
-              collaboratively to turn your vision into reality, delivering
-              solutions that are not just technically excellent but also
-              commercially successful.
+              Adopt the latest technologies into your business without
+              operational disruptions. Empower your business with our services.
             </p>
           </div>
 

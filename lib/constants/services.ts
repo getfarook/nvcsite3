@@ -217,19 +217,3 @@ export const BENEFITS: Benefit[] = [
     description: "Built to grow with your business, from startup to enterprise",
   },
 ];
-
-// Technology stack for showcase
-export const TECHNOLOGY_STACK: string[] = [
-  "React",
-  "Next.js",
-  "Node.js",
-  "Flutter",
-  "Python",
-  "TypeScript",
-  "AWS",
-  "Docker",
-  "MongoDB",
-  "PostgreSQL",
-  "TensorFlow",
-  "Figma",
-];

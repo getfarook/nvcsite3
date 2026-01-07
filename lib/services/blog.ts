@@ -83,6 +83,7 @@ export async function getBlogPostBySlug(
     imageUrl: summary.imageUrl,
     category: summary.category,
     readTime: summary.readTime,
+    excerpt: summary.excerpt,
     author: contentData.author,
     content: contentData.content,
   };

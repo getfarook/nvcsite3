@@ -12,7 +12,7 @@ export function ScatteredBackground() {
   if (!mounted) return null;
 
   return (
-    <div className="fixed inset-0 z-[-1] overflow-hidden pointer-events-none select-none">
+    <div className="fixed inset-0 z-[-1] overflow-hidden pointer-events-none select-none hidden dark:block">
       {/* Global Blue Tint - Linear Gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-[var(--gradient-blue)]/5 via-transparent to-[var(--gradient-blue)]/5 opacity-40 mix-blend-overlay" />
 

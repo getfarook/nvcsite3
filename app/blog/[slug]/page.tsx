@@ -1,71 +1,62 @@
-"use client";
-
 import { ParticleBackground } from "@/components/particle-background";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { THEME } from "@/lib/constants/theme";
 import { getBlogPostBySlug } from "@/lib/services/blog";
-import { BlogPost } from "@/lib/types/blog";
 import { ArrowLeft, Calendar, Clock, FileX, User } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-import { use, useEffect, useState } from "react";
+import { Metadata } from "next";
 
-export default function BlogDetailPage({
-  params,
-}: {
+type Props = {
   params: Promise<{ slug: string }>;
-}) {
-  const { slug } = use(params);
-  const [post, setPost] = useState<BlogPost | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
+};
 
-  useEffect(() => {
-    async function fetchPost() {
-      try {
-        const response = await getBlogPostBySlug(slug);
-        if (!response.post) {
-          setError(true);
-        } else {
-          setPost(response.post);
-        }
-      } catch (err) {
-        console.error("Failed to fetch blog post:", err);
-        setError(true);
-      } finally {
-        setLoading(false);
-      }
-    }
-    fetchPost();
-  }, [slug]);
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const { post } = await getBlogPostBySlug(slug);
 
-  // Loading state
-  if (loading) {
-    return (
-      <main className="relative min-h-screen">
-        <ParticleBackground />
-        <div className="relative z-10">
-          <Navbar />
-          <div className="pt-32 pb-24 px-4 sm:px-6 lg:px-8">
-            <div className="max-w-3xl mx-auto space-y-8">
-              <div className="h-8 w-32 bg-muted/20 rounded animate-pulse" />
-              <div className="h-12 w-full bg-muted/20 rounded animate-pulse" />
-              <div className="aspect-video bg-muted/20 rounded-2xl animate-pulse" />
-              <div className="space-y-4">
-                <div className="h-4 w-full bg-muted/20 rounded animate-pulse" />
-                <div className="h-4 w-3/4 bg-muted/20 rounded animate-pulse" />
-                <div className="h-4 w-5/6 bg-muted/20 rounded animate-pulse" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </main>
-    );
+  if (!post) {
+    return {
+      title: "Post Not Found",
+    };
   }
 
-  // Post not found state
-  if (error || !post) {
+  return {
+    title: post.title,
+    description: post.excerpt,
+    openGraph: {
+      title: post.title,
+      description: post.excerpt,
+      type: "article",
+      publishedTime: post.date,
+      authors: [post.author],
+      images: [
+        {
+          url: post.imageUrl,
+          width: 1200,
+          height: 630,
+          alt: post.title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.excerpt,
+      images: [post.imageUrl],
+    },
+    alternates: {
+      canonical: `/blog/${slug}`,
+    },
+  };
+}
+
+export default async function BlogDetailPage({ params }: Props) {
+  const { slug } = await params;
+  const { post } = await getBlogPostBySlug(slug);
+
+  if (!post) {
     return (
       <main className="relative min-h-screen">
         <ParticleBackground />
@@ -103,8 +94,25 @@ export default function BlogDetailPage({
     );
   }
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    image: post.imageUrl,
+    datePublished: post.date,
+    author: {
+      "@type": "Person",
+      name: post.author,
+    },
+    description: post.excerpt,
+  };
+
   return (
     <main className="relative min-h-screen">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <ParticleBackground />
       <div className="relative z-10">
         <Navbar />
@@ -163,7 +171,7 @@ export default function BlogDetailPage({
             </div>
 
             {/* Content */}
-            <div className="prose prose-lg dark:prose-invert max-w-none text-muted-foreground leading-relaxed">
+            <div className="prose prose-lg dark:prose-invert max-w-none text-foreground/90 leading-relaxed">
               {post.content}
             </div>
           </div>

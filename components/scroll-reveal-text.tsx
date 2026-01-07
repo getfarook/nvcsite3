@@ -76,7 +76,7 @@ export function ScrollRevealText() {
   return (
     <div
       ref={containerRef}
-      className="relative bg-black"
+      className="relative bg-background"
       style={{ height: SCROLL_REVEAL.scrollHeight }}
     >
       {/* Sticky content */}
@@ -115,7 +115,7 @@ export function ScrollRevealText() {
                   key={index}
                   className="inline-block transition-all ease-out"
                   style={{
-                    color: `rgba(255, 255, 255, ${opacity})`,
+                    color: `rgba(var(--scroll-text-rgb), ${opacity})`,
                     transitionDuration: `${SCROLL_REVEAL.transitionDuration}ms`,
                   }}
                 >

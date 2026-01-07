@@ -8,12 +8,7 @@ import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import {
-  SERVICES,
-  PROCESS_STEPS,
-  BENEFITS,
-  TECHNOLOGY_STACK,
-} from "@/lib/constants/services";
+import { SERVICES, PROCESS_STEPS, BENEFITS } from "@/lib/constants/services";
 
 export default function ServicesPage() {
   return (
@@ -182,33 +177,6 @@ export default function ServicesPage() {
                 <p className="text-sm text-muted-foreground leading-relaxed">
                   {benefit.description}
                 </p>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Technologies Showcase */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-7xl">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-              Technology Stack
-            </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Working with the latest and most powerful technologies
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
-            {TECHNOLOGY_STACK.map((tech, index) => (
-              <Card
-                key={index}
-                className="p-6 border-border/50 hover:border-accent/50 transition-all text-center group"
-              >
-                <div className="text-lg font-semibold group-hover:text-accent transition-colors">
-                  {tech}
-                </div>
               </Card>
             ))}
           </div>

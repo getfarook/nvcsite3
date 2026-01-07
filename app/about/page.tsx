@@ -16,7 +16,7 @@ import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { VALUES, TIMELINE, TEAM, STATS } from "@/lib/constants/about";
+import { VALUES, TIMELINE, STATS } from "@/lib/constants/about";
 
 export default function AboutPage() {
   return (
@@ -235,37 +235,6 @@ export default function AboutPage() {
                 className="object-cover"
               />
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Team Section */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-7xl">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-              Meet Our Team
-            </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Talented professionals dedicated to your success
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {TEAM.map((member, index) => (
-              <Card
-                key={index}
-                className="p-6 border-border/50 hover:border-accent/50 transition-all text-center"
-              >
-                <div className="mb-4 mx-auto p-4 rounded-full bg-accent/10 w-fit">
-                  <Users className="h-8 w-8 text-accent" />
-                </div>
-                <h3 className="text-lg font-semibold mb-1">{member.name}</h3>
-                <p className="text-sm text-accent mb-3">{member.role}</p>
-                <p className="text-xs text-muted-foreground leading-relaxed">
-                  {member.description}
-                </p>
-              </Card>
-            ))}
           </div>
         </div>
       </section>

@@ -16,24 +16,35 @@ interface AiNodesMarginProps {
   width?: number; // Width in pixels
 }
 
-export function AiNodesMargin({ side, width = 80 }: AiNodesMarginProps) {
+export function AiNodesMargin({
+  side,
+  width = "5%",
+}: {
+  side: "left" | "right";
+  width?: string | number;
+}) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const { theme } = useTheme();
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    if (!canvas) return;
+    const container = containerRef.current;
+    if (!canvas || !container) return;
 
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
     let animationFrameId: number;
     let nodes: Node[] = [];
-    let canvasWidth = width;
+    let canvasWidth = 0;
     let canvasHeight = 0;
 
     const resize = () => {
-      canvasHeight = document.documentElement.scrollHeight;
+      const rect = container.getBoundingClientRect();
+      canvasWidth = rect.width;
+      canvasHeight = document.documentElement.scrollHeight; // Full page height
+
       canvas.width = canvasWidth;
       canvas.height = canvasHeight;
       initNodes();
@@ -41,7 +52,8 @@ export function AiNodesMargin({ side, width = 80 }: AiNodesMarginProps) {
 
     const initNodes = () => {
       nodes = [];
-      // Node density: 1 node per 8000px^2 for a denser look in the narrow margin
+      // Node density adapted for dynamically changing width
+      if (canvasWidth === 0) return;
       const nodeCount = Math.floor((canvasWidth * canvasHeight) / 8000);
 
       for (let i = 0; i < nodeCount; i++) {
@@ -107,12 +119,15 @@ export function AiNodesMargin({ side, width = 80 }: AiNodesMarginProps) {
       animationFrameId = requestAnimationFrame(draw);
     };
 
-    // Handle scroll height changes
+    // Handle resize
     const resizeObserver = new ResizeObserver(() => {
       resize();
     });
 
+    resizeObserver.observe(container);
     resizeObserver.observe(document.body);
+
+    // Initial resize to capture correct dimensions immediately
     resize();
     draw();
 
@@ -120,14 +135,15 @@ export function AiNodesMargin({ side, width = 80 }: AiNodesMarginProps) {
       resizeObserver.disconnect();
       cancelAnimationFrame(animationFrameId);
     };
-  }, [theme, width]);
+  }, [theme]); // Removed width from dependency as we observe container size
 
   return (
     <div
+      ref={containerRef}
       className={`fixed top-0 ${
         side === "left" ? "left-0" : "right-0"
       } h-screen z-50 pointer-events-none hidden lg:block`}
-      style={{ width: `${width}px` }}
+      style={{ width }}
     >
       {/* Gradient fade effect towards content */}
       <div
@@ -146,8 +162,8 @@ export function AiNodesMargin({ side, width = 80 }: AiNodesMarginProps) {
 export function AiNodesSideMargins() {
   return (
     <>
-      <AiNodesMargin side="left" width={80} />
-      <AiNodesMargin side="right" width={80} />
+      <AiNodesMargin side="left" width="5%" />
+      <AiNodesMargin side="right" width="5%" />
     </>
   );
 }

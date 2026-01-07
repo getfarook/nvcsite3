@@ -16,7 +16,7 @@ export interface BlogPostSummary {
 /**
  * Full blog post data including content for detail pages
  */
-export interface BlogPost extends Omit<BlogPostSummary, "excerpt"> {
+export interface BlogPost extends BlogPostSummary {
   author: string;
   content: ReactNode;
 }
