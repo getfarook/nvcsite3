@@ -5,6 +5,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { ScatteredBackground } from "@/components/scattered-background";
 import { AiNodesSideMargins } from "@/components/ai-nodes-margin";
 import { ThemeProvider } from "@/components/theme-provider";
+import WelcomePopup from "@/components/welcome-popup";
 import "./globals.css";
 
 const _geist = Geist({ subsets: ["latin"] });
@@ -118,6 +119,7 @@ export default function RootLayout({
           {/* {children} */}
           <AiNodesSideMargins />
           <div className="lg:px-[5%]">{children}</div>
+          <WelcomePopup />
           <Analytics />
         </ThemeProvider>
       </body>
