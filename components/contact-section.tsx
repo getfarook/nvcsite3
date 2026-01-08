@@ -237,7 +237,7 @@ export function ContactSection() {
       {/* Success Modal */}
       {showSuccess && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-background/80 backdrop-blur-md animate-in fade-in duration-300">
-          <div className="relative w-full max-w-sm bg-gradient-to-b from-background to-accent/5 rounded-3xl shadow-2xl border border-border/50 p-8 animate-in slide-in-from-bottom-8 zoom-in-95 duration-500 overflow-hidden">
+          <div className="relative w-full max-w-sm bg-linear-to-b from-background to-accent/5 rounded-3xl shadow-2xl border border-border/50 p-8 animate-in slide-in-from-bottom-8 zoom-in-95 duration-500 overflow-hidden">
             {/* Decorative background glow */}
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-32 bg-primary/20 blur-3xl rounded-full -z-10" />
 
@@ -250,13 +250,13 @@ export function ContactSection() {
             <div className="flex flex-col items-center text-center space-y-6 pt-4">
               <div className="relative">
                 <div className="absolute inset-0 bg-green-500/20 blur-xl rounded-full" />
-                <div className="relative h-20 w-20 rounded-full bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center shadow-lg transform transition-transform hover:scale-105 duration-300">
+                <div className="relative h-20 w-20 rounded-full bg-linear-to-br from-green-500 to-emerald-600 flex items-center justify-center shadow-lg transform transition-transform hover:scale-105 duration-300">
                   <CheckCircle2 className="h-10 w-10 text-white" />
                 </div>
               </div>
 
               <div className="space-y-2">
-                <h3 className="text-2xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-foreground to-foreground/70">
+                <h3 className="text-2xl font-bold tracking-tight bg-clip-text text-transparent bg-linear-to-r from-foreground to-foreground/70">
                   Message Sent!
                 </h3>
                 <p className="text-muted-foreground text-sm leading-relaxed max-w-[250px] mx-auto">

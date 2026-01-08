@@ -3,7 +3,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { ParticleBackground } from "@/components/particle-background";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
@@ -13,7 +12,6 @@ import { SERVICES, PROCESS_STEPS, BENEFITS } from "@/lib/constants/services";
 export default function ServicesPage() {
   return (
     <main className="relative min-h-screen">
-      <ParticleBackground />
       <Navbar />
       <div className="h-16" />
 
@@ -113,40 +111,6 @@ export default function ServicesPage() {
                   </div>
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Process Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-7xl">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4">Our Process</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              A proven methodology that delivers results consistently
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {PROCESS_STEPS.map((step, index) => (
-              <Card
-                key={index}
-                className="p-6 border-border/50 hover:border-accent/50 transition-all relative group"
-              >
-                <div className="text-6xl font-bold text-accent/10 absolute top-4 right-4 group-hover:text-accent/20 transition-colors">
-                  {step.number}
-                </div>
-                <div className="relative">
-                  <div className="mb-4 p-3 rounded-lg bg-accent/10 w-fit group-hover:bg-accent/20 transition-colors">
-                    <step.icon className="h-6 w-6 text-accent" />
-                  </div>
-                  <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    {step.description}
-                  </p>
-                </div>
-              </Card>
             ))}
           </div>
         </div>

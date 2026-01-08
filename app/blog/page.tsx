@@ -1,6 +1,5 @@
 "use client";
 
-import { ParticleBackground } from "@/components/particle-background";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { BlogPostCard } from "@/components/blog-post-card";
@@ -29,7 +28,6 @@ export default function BlogPage() {
 
   return (
     <main className="relative min-h-screen">
-      <ParticleBackground />
       <div className="relative z-10">
         <Navbar />
 

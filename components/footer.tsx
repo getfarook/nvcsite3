@@ -3,13 +3,12 @@
 import Image from "next/image";
 import { COMPANY, FOOTER, SOCIAL_LINKS } from "@/lib/constants";
 import { THEME } from "@/lib/constants/theme";
-import { scrollToSection } from "@/lib/utils/helpers";
-
+import Link from "next/link";
 export function Footer() {
   const socialLinksArray = Object.values(SOCIAL_LINKS);
 
   return (
-    <footer className="border-t border-white/5 backdrop-blur-md bg-white/5">
+    <footer className="border-t border-border bg-muted/20 backdrop-blur-md">
       <div
         className={`${THEME.spacing.container} ${THEME.spacing.section.px} py-12`}
       >
@@ -48,13 +47,13 @@ export function Footer() {
             <h3 className="font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2">
               {FOOTER.quickLinks.map((link) => (
-                <li key={link.sectionId}>
-                  <button
-                    onClick={() => scrollToSection(link.sectionId)}
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
                     className="text-sm text-muted-foreground hover:text-accent transition-colors"
                   >
                     {link.label}
-                  </button>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -77,7 +76,7 @@ export function Footer() {
           <p className="text-sm text-muted-foreground">
             © {COMPANY.year} {COMPANY.name}. All rights reserved.
           </p>
-          <div className="flex items-center gap-6">
+          {/* <div className="flex items-center gap-6">
             {FOOTER.legal.map((link) => (
               <a
                 key={link.label}
@@ -87,7 +86,7 @@ export function Footer() {
                 {link.label}
               </a>
             ))}
-          </div>
+          </div> */}
         </div>
       </div>
     </footer>

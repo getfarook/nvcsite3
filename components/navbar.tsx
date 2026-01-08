@@ -71,11 +71,6 @@ export function Navbar() {
                 </Link>
               );
             })}
-            <Link href={NAVIGATION.cta.href}>
-              <Button size="sm" className={THEME.button.primary}>
-                {NAVIGATION.cta.label}
-              </Button>
-            </Link>
             <ThemeToggle />
           </div>
 
@@ -121,14 +116,6 @@ export function Navbar() {
                 </Link>
               );
             })}
-            <Link
-              href={NAVIGATION.cta.href}
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              <Button className={`w-full ${THEME.button.primary}`}>
-                {NAVIGATION.cta.label}
-              </Button>
-            </Link>
           </div>
         </div>
       )}

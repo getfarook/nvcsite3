@@ -1,4 +1,3 @@
-import { ParticleBackground } from "@/components/particle-background";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { THEME } from "@/lib/constants/theme";
@@ -59,7 +58,6 @@ export default async function BlogDetailPage({ params }: Props) {
   if (!post) {
     return (
       <main className="relative min-h-screen">
-        <ParticleBackground />
         <div className="relative z-10">
           <Navbar />
           <div className="pt-32 pb-24 px-4 sm:px-6 lg:px-8">
@@ -113,7 +111,6 @@ export default async function BlogDetailPage({ params }: Props) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <ParticleBackground />
       <div className="relative z-10">
         <Navbar />
 

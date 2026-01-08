@@ -25,7 +25,7 @@ export async function POST(req: Request) {
 
     // Send email
     await transporter.sendMail({
-      from: process.env.EMAIL_USER,
+      from: `"${name}" <${process.env.EMAIL_USER}>`,
       to: process.env.EMAIL_TO || process.env.EMAIL_USER, // Default to self if to-address not set
       subject: `New Contact Form Submission from ${name}`,
       html: generateContactEmailTemplate(name, email, phone, message),

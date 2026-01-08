@@ -44,6 +44,7 @@ export const NAVIGATION = {
   main: [
     { href: "/", label: "Home" },
     { href: "/services", label: "Services" },
+    { href: "/ai-labs", label: "AI Labs" },
     { href: "/about", label: "About" },
     { href: "/blog", label: "Blog" },
     { href: "/contact", label: "Contact" },
@@ -99,9 +100,9 @@ export const SOCIAL_LINKS = {
  */
 export const FOOTER = {
   quickLinks: [
-    { label: "Services", sectionId: "services" },
-    { label: "About Us", sectionId: "about" },
-    { label: "Contact", sectionId: "contact" },
+    { label: "Services", href: "/services" },
+    { label: "About Us", href: "/about" },
+    { label: "Contact", href: "/contact" },
   ],
   services: [
     "Web Application Development",
@@ -133,15 +134,15 @@ export const HERO = {
     "NOVIZCO is a technology services company focused on Web Applications, Mobile Applications, UI UX and Cloud Platform Services. We are full stack development experts on technologies like Flutter, React Native, ReactJS, Go, NodeJS, Amazon AWS and Google Cloud Platform.",
   ctas: [
     {
-      label: "Start Your Project",
+      label: "Contact us",
       icon: ArrowRight,
       variant: "primary" as const,
       href: "/contact",
     },
     {
-      label: "Explore Services",
+      label: "Hire a Resource",
       variant: "outline" as const,
-      href: "/services",
+      href: "/hire-resource",
       icon: undefined,
     },
   ],
@@ -172,7 +173,7 @@ export const SCROLL_REVEAL = {
       speed: 1.7, // normal speed
     },
   ],
-  scrollHeight: "150vh",
+  scrollHeight: "120vh",
   revealOpacity: {
     revealed: 1,
     hidden: 0.2,

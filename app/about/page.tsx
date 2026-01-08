@@ -11,7 +11,6 @@ import {
   Mail,
   Phone,
 } from "lucide-react";
-import { ParticleBackground } from "@/components/particle-background";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
@@ -21,7 +20,6 @@ import { VALUES, TIMELINE, STATS } from "@/lib/constants/about";
 export default function AboutPage() {
   return (
     <main className="relative min-h-screen">
-      <ParticleBackground />
       <Navbar />
       {/* Navbar Spacer */}
       <div className="h-16" />
@@ -143,123 +141,6 @@ export default function AboutPage() {
                   {value.description}
                 </p>
               </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Timeline Section */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-7xl">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4">Our Journey</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Milestones that shaped our story
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {TIMELINE.map((item, index) => (
-              <Card
-                key={index}
-                className="p-6 border-border/50 hover:border-accent/50 transition-all group"
-              >
-                <div className="text-4xl font-bold text-accent mb-3 group-hover:scale-110 transition-transform">
-                  {item.year}
-                </div>
-                <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  {item.description}
-                </p>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Office Image Section */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-muted/30">
-        <div className="mx-auto max-w-7xl">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-3xl sm:text-4xl font-bold mb-6">
-                Where We Work
-              </h2>
-              <p className="text-muted-foreground leading-relaxed mb-6">
-                Our modern workspace in Bangalore is designed to foster
-                creativity, collaboration, and innovation. With state-of-the-art
-                facilities and a culture that celebrates both individuality and
-                teamwork, we've created an environment where great ideas
-                flourish.
-              </p>
-              <div className="space-y-4">
-                <div className="flex items-center gap-3">
-                  <div className="p-2 rounded-lg bg-accent/10">
-                    <MapPin className="h-5 w-5 text-accent" />
-                  </div>
-                  <div>
-                    <p className="font-medium">Location</p>
-                    <p className="text-sm text-muted-foreground">
-                      Bangalore, Karnataka, India
-                    </p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="p-2 rounded-lg bg-accent/10">
-                    <Mail className="h-5 w-5 text-accent" />
-                  </div>
-                  <div>
-                    <p className="font-medium">Email</p>
-                    <p className="text-sm text-muted-foreground">
-                      info@novizco.com
-                    </p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="p-2 rounded-lg bg-accent/10">
-                    <Phone className="h-5 w-5 text-accent" />
-                  </div>
-                  <div>
-                    <p className="font-medium">Phone</p>
-                    <p className="text-sm text-muted-foreground">
-                      +91 98765 43210
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="relative h-[400px] rounded-2xl overflow-hidden">
-              <Image
-                src="/images/about/office.png"
-                alt="NOVIZCO Office Workspace"
-                fill
-                className="object-cover"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Stats Section */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-muted/30">
-        <div className="mx-auto max-w-7xl">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-              By The Numbers
-            </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Our track record speaks for itself
-            </p>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
-            {STATS.map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="text-4xl sm:text-5xl font-bold text-accent mb-2">
-                  {stat.value}
-                </div>
-                <div className="text-sm text-muted-foreground">
-                  {stat.label}
-                </div>
-              </div>
             ))}
           </div>
         </div>
