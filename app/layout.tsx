@@ -116,7 +116,6 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <ScatteredBackground />
-          {/* {children} */}
           <AiNodesSideMargins />
           <div className="lg:px-[5%]">{children}</div>
           <WelcomePopup />

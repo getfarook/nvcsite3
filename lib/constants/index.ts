@@ -5,11 +5,6 @@ import {
   Brain,
   Cloud,
   Zap,
-  Users,
-  Rocket,
-  Shield,
-  TrendingUp,
-  Github,
   Linkedin,
   Twitter,
   ArrowRight,
@@ -47,6 +42,7 @@ export const NAVIGATION = {
     { href: "/ai-labs", label: "AI Labs" },
     { href: "/about", label: "About" },
     { href: "/blog", label: "Blog" },
+    { href: "/careers", label: "Careers" },
     { href: "/contact", label: "Contact" },
   ],
   cta: {
@@ -102,6 +98,7 @@ export const FOOTER = {
   quickLinks: [
     { label: "Services", href: "/services" },
     { label: "About Us", href: "/about" },
+    { label: "Careers", href: "/careers" },
     { label: "Contact", href: "/contact" },
   ],
   services: [
@@ -111,10 +108,6 @@ export const FOOTER = {
     "Cloud Platform Consulting",
     "Digital Content Designing",
     "Artificial Intelligence",
-  ],
-  legal: [
-    { href: "#", label: "Privacy Policy" },
-    { href: "#", label: "Terms of Service" },
   ],
 } as const;
 

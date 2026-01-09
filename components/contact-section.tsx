@@ -31,12 +31,21 @@ export function ContactSection() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Validate form
+    // Validate form - only email is required
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    let emailError = "";
+
+    if (!formData.email.trim()) {
+      emailError = "Email is required";
+    } else if (!emailRegex.test(formData.email)) {
+      emailError = "Please enter a valid email address";
+    }
+
     const newErrors = {
-      name: formData.name ? "" : "Name is required",
-      email: formData.email ? "" : "Email is required",
-      phone: formData.phone ? "" : "Phone number is required",
-      message: formData.message ? "" : "Message is required",
+      name: "",
+      email: emailError,
+      phone: "",
+      message: "",
     };
 
     setErrors(newErrors);

@@ -82,7 +82,7 @@ export function ScrollRevealText() {
       {/* Sticky content */}
       <div className="sticky top-0 h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-5xl">
-          <p className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight">
+          <p className="text-4xl sm:text-5xl md:text-6xl font-light leading-tight">
             {characters.map((char, index) => {
               // Determine which section this character belongs to
               let revealProgress = 0;

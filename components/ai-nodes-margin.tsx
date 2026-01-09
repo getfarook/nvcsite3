@@ -90,7 +90,7 @@ export function AiNodesMargin({
         ctx.fillStyle =
           theme === "dark"
             ? "rgba(100, 200, 255, 0.5)"
-            : "rgba(0, 100, 200, 0.3)";
+            : "rgba(100, 100, 100, 0.4)";
         ctx.fill();
 
         // Draw connections
@@ -109,7 +109,7 @@ export function AiNodesMargin({
             ctx.strokeStyle =
               theme === "dark"
                 ? `rgba(100, 200, 255, ${opacity})`
-                : `rgba(0, 100, 200, ${opacity})`;
+                : `rgba(100, 100, 100, ${opacity})`;
             ctx.lineWidth = 1;
             ctx.stroke();
           }

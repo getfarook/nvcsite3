@@ -6,12 +6,13 @@ import { VisuallyHidden } from "@/components/ui/visually-hidden";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { MessageSquare, Send, Loader2, X, ArrowRight } from "lucide-react";
+import { MessageSquare, Loader2, X, ArrowRight } from "lucide-react";
 import { toast } from "sonner";
 
 export default function WelcomePopup() {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [emailError, setEmailError] = useState("");
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -27,15 +28,40 @@ export default function WelcomePopup() {
     return () => clearTimeout(timer);
   }, []);
 
+  const validateEmail = (email: string): boolean => {
+    if (!email.trim()) {
+      setEmailError("Email is required");
+      return false;
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setEmailError("Please enter a valid email address");
+      return false;
+    }
+    setEmailError("");
+    return true;
+  };
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { id, value } = e.target;
     setFormData((prev) => ({ ...prev, [id]: value }));
+
+    // Clear email error when user starts typing
+    if (id === "email" && emailError) {
+      setEmailError("");
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Validate email before submission
+    if (!validateEmail(formData.email)) {
+      return;
+    }
+
     setLoading(true);
 
     try {
@@ -50,6 +76,7 @@ export default function WelcomePopup() {
       toast.success("Message sent successfully!");
       setOpen(false);
       setFormData({ name: "", email: "", phone: "", message: "" });
+      setEmailError("");
     } catch (error) {
       console.error(error);
       toast.error("Failed to send message. Please try again.");
@@ -95,35 +122,40 @@ export default function WelcomePopup() {
               placeholder="Your Name"
               value={formData.name}
               onChange={handleChange}
-              required
               className="h-10 bg-background border-border focus:border-accent transition-all"
             />
-            <div className="grid grid-cols-2 gap-3">
-              <Input
-                id="email"
-                type="email"
-                placeholder="Email"
-                value={formData.email}
-                onChange={handleChange}
-                required
-                className="h-10 bg-background border-border focus:border-accent transition-all"
-              />
-              <Input
-                id="phone"
-                type="tel"
-                placeholder="Phone"
-                value={formData.phone}
-                onChange={handleChange}
-                required
-                className="h-10 bg-background border-border focus:border-accent transition-all"
-              />
+            <div className="space-y-1">
+              <div className="grid grid-cols-2 gap-3">
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder="Email *"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className={`h-10 bg-background border-border focus:border-accent transition-all ${
+                    emailError ? "border-red-500 focus:border-red-500" : ""
+                  }`}
+                />
+                <Input
+                  id="phone"
+                  type="tel"
+                  placeholder="Phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  className="h-10 bg-background border-border focus:border-accent transition-all"
+                />
+              </div>
+              {emailError && (
+                <p className="text-red-500 text-xs font-medium pl-1">
+                  {emailError}
+                </p>
+              )}
             </div>
             <Textarea
               id="message"
               placeholder="Tell us about your project..."
               value={formData.message}
               onChange={handleChange}
-              required
               className="min-h-[80px] bg-background border-border focus:border-accent transition-all resize-none"
             />
 

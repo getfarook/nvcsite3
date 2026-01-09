@@ -76,17 +76,6 @@ export function Footer() {
           <p className="text-sm text-muted-foreground">
             © {COMPANY.year} {COMPANY.name}. All rights reserved.
           </p>
-          {/* <div className="flex items-center gap-6">
-            {FOOTER.legal.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                className="text-sm text-muted-foreground hover:text-accent transition-colors"
-              >
-                {link.label}
-              </a>
-            ))}
-          </div> */}
         </div>
       </div>
     </footer>

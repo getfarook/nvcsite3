@@ -19,7 +19,7 @@ export default function ServicesPage() {
       <section className="relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-accent/5 via-transparent to-transparent" />
         <div className="relative z-10 mx-auto max-w-7xl">
-          <div className="text-center mb-12">
+          <div className="text-center">
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-6 text-balance">
               Our{" "}
               <span className="bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent">
