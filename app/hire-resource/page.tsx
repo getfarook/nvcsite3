@@ -29,6 +29,7 @@ import {
 
 import { useState } from "react";
 import { toast } from "sonner";
+import { NeuralNetworkBackground } from "@/components/neural-network-background";
 
 export default function HireResourcePage() {
   const [loading, setLoading] = useState(false);
@@ -123,7 +124,6 @@ export default function HireResourcePage() {
     <main className="relative min-h-screen">
       {/* ... Navbar and Hero ... */}
       <Navbar />
-      <div className="h-16" />
 
       {/* Success Dialog */}
       <Dialog open={showSuccess} onOpenChange={setShowSuccess}>
@@ -152,11 +152,14 @@ export default function HireResourcePage() {
       </Dialog>
 
       {/* Hero Header */}
-      <section className="relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
-        <div className="absolute inset-0 bg-linear-to-b from-accent/5 via-transparent to-transparent" />
+      <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 overflow-hidden">
+        <NeuralNetworkBackground />
         <div className="relative z-10 mx-auto max-w-3xl text-center">
-          <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-6">
-            Hire Top <span className="text-accent">Talent</span>
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-6 text-balance">
+            Hire Top{" "}
+            <span className="bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent">
+              Talent
+            </span>
           </h1>
           <p className="text-xl text-muted-foreground leading-relaxed">
             Find the perfect resource for your project. Tell us your

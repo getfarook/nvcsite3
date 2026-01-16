@@ -9,6 +9,10 @@ import { Textarea } from "@/components/ui/textarea";
 import { Mail, Phone, MapPin, Send, CheckCircle2, X } from "lucide-react";
 import { useState } from "react";
 
+import { AiNodesBackground } from "@/components/ai-nodes-background";
+
+// ... existing imports ...
+
 export function ContactSection() {
   const [formData, setFormData] = useState({
     name: "",
@@ -85,168 +89,179 @@ export function ContactSection() {
   };
 
   return (
-    <section id="contact" className="relative py-24 px-4 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-7xl">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-4 text-balance">
-            Get In Touch
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-pretty">
-            {
-              "Ready to start your project? Let's discuss how we can help bring your vision to life"
-            }
-          </p>
+    <>
+      {/* Hero Section */}
+      <section className="relative py-24 sm:py-32 flex items-center justify-center px-4 sm:px-6 lg:px-8 overflow-hidden">
+        {/* <AiNodesBackground /> */}
+        <div className="relative z-10 mx-auto max-w-7xl mt-16">
+          <div className="text-center">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-6 text-balance">
+              Get In{" "}
+              <span className="bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent">
+                Touch
+              </span>
+            </h1>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+              Ready to start your project? Let's discuss how we can help bring
+              your vision to life
+            </p>
+          </div>
         </div>
+      </section>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Contact Info */}
-          <div className="space-y-6">
-            <Card className="p-6 border-border/50">
-              <div className="flex items-start gap-4">
-                <div className="p-3 rounded-lg bg-accent/10">
-                  <Mail className="h-6 w-6 text-accent" />
+      {/* Contact Form Section */}
+      <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8 bg-muted/30">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {/* Contact Info */}
+            <div className="space-y-6">
+              <Card className="p-6 border-border/50">
+                <div className="flex items-start gap-4">
+                  <div className="p-3 rounded-lg bg-accent/10">
+                    <Mail className="h-6 w-6 text-accent" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold mb-1">Email</h3>
+                    <p className="text-sm text-muted-foreground">
+                      info@novizco.com
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="font-semibold mb-1">Email</h3>
-                  <p className="text-sm text-muted-foreground">
-                    info@novizco.com
-                  </p>
-                </div>
-              </div>
-            </Card>
+              </Card>
 
-            <Card className="p-6 border-border/50">
-              <div className="flex items-start gap-4">
-                <div className="p-3 rounded-lg bg-accent/10">
-                  <Phone className="h-6 w-6 text-accent" />
+              <Card className="p-6 border-border/50">
+                <div className="flex items-start gap-4">
+                  <div className="p-3 rounded-lg bg-accent/10">
+                    <Phone className="h-6 w-6 text-accent" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold mb-1">Phone</h3>
+                    <p className="text-sm text-muted-foreground">
+                      +91 95677 34622
+                    </p>
+                    <p className="text-sm text-muted-foreground">
+                      +91 89214 18593
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="font-semibold mb-1">Phone</h3>
-                  <p className="text-sm text-muted-foreground">
-                    +91 95677 34622
-                  </p>
-                  <p className="text-sm text-muted-foreground">
-                    +91 89214 18593
-                  </p>
-                </div>
-              </div>
-            </Card>
+              </Card>
 
-            <Card className="p-6 border-border/50">
-              <div className="flex items-start gap-4">
-                <div className="p-3 rounded-lg bg-accent/10">
-                  <MapPin className="h-6 w-6 text-accent" />
+              <Card className="p-6 border-border/50">
+                <div className="flex items-start gap-4">
+                  <div className="p-3 rounded-lg bg-accent/10">
+                    <MapPin className="h-6 w-6 text-accent" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold mb-1">Location</h3>
+                    <p className="text-sm text-muted-foreground">
+                      NOVIZCO INFOTECH PVT. LTD.
+                    </p>
+                    <p className="text-sm text-muted-foreground">
+                      B&M Business Center, Kakkanad
+                    </p>
+                    <p className="text-sm text-muted-foreground">
+                      Kochi, India – 682030
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="font-semibold mb-1">Location</h3>
-                  <p className="text-sm text-muted-foreground">
-                    NOVIZCO INFOTECH PVT. LTD.
-                  </p>
-                  <p className="text-sm text-muted-foreground">
-                    B&M Business Center, Kakkanad
-                  </p>
-                  <p className="text-sm text-muted-foreground">
-                    Kochi, India – 682030
-                  </p>
+              </Card>
+            </div>
+
+            {/* Contact Form */}
+            <Card className="lg:col-span-2 p-8 border-border/50">
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <label htmlFor="name" className="text-sm font-medium">
+                      Name
+                    </label>
+                    <Input
+                      id="name"
+                      placeholder="Your name"
+                      value={formData.name}
+                      onChange={(e) =>
+                        setFormData({ ...formData, name: e.target.value })
+                      }
+                    />
+                    {errors.name && (
+                      <p className="text-sm text-red-500">{errors.name}</p>
+                    )}
+                  </div>
+                  <div className="space-y-2">
+                    <label htmlFor="email" className="text-sm font-medium">
+                      Email
+                    </label>
+                    <Input
+                      id="email"
+                      type="email"
+                      placeholder="your@email.com"
+                      value={formData.email}
+                      onChange={(e) =>
+                        setFormData({ ...formData, email: e.target.value })
+                      }
+                    />
+                    {errors.email && (
+                      <p className="text-sm text-red-500">{errors.email}</p>
+                    )}
+                  </div>
                 </div>
-              </div>
+
+                <div className="space-y-2">
+                  <label htmlFor="phone" className="text-sm font-medium">
+                    Phone
+                  </label>
+                  <Input
+                    id="phone"
+                    type="tel"
+                    placeholder="+91 98765 43210"
+                    value={formData.phone}
+                    onChange={(e) =>
+                      setFormData({ ...formData, phone: e.target.value })
+                    }
+                  />
+                  {errors.phone && (
+                    <p className="text-sm text-red-500">{errors.phone}</p>
+                  )}
+                </div>
+
+                <div className="space-y-2">
+                  <label htmlFor="message" className="text-sm font-medium">
+                    Message
+                  </label>
+                  <Textarea
+                    id="message"
+                    placeholder="Tell us about your project..."
+                    rows={6}
+                    value={formData.message}
+                    onChange={(e) =>
+                      setFormData({ ...formData, message: e.target.value })
+                    }
+                  />
+                  {errors.message && (
+                    <p className="text-sm text-red-500">{errors.message}</p>
+                  )}
+                </div>
+
+                <Button
+                  type="submit"
+                  size="lg"
+                  className="w-full bg-white hover:bg-gray-100 text-gray-900 border border-gray-200 transition-colors"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? "Sending..." : "Send Message"}
+                  {!isSubmitting && <Send className="ml-2 h-5 w-5" />}
+                </Button>
+              </form>
             </Card>
           </div>
-
-          {/* Contact Form */}
-          <Card className="lg:col-span-2 p-8 border-border/50">
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <label htmlFor="name" className="text-sm font-medium">
-                    Name
-                  </label>
-                  <Input
-                    id="name"
-                    placeholder="Your name"
-                    value={formData.name}
-                    onChange={(e) =>
-                      setFormData({ ...formData, name: e.target.value })
-                    }
-                  />
-                  {errors.name && (
-                    <p className="text-sm text-red-500">{errors.name}</p>
-                  )}
-                </div>
-                <div className="space-y-2">
-                  <label htmlFor="email" className="text-sm font-medium">
-                    Email
-                  </label>
-                  <Input
-                    id="email"
-                    type="email"
-                    placeholder="your@email.com"
-                    value={formData.email}
-                    onChange={(e) =>
-                      setFormData({ ...formData, email: e.target.value })
-                    }
-                  />
-                  {errors.email && (
-                    <p className="text-sm text-red-500">{errors.email}</p>
-                  )}
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <label htmlFor="phone" className="text-sm font-medium">
-                  Phone
-                </label>
-                <Input
-                  id="phone"
-                  type="tel"
-                  placeholder="+91 98765 43210"
-                  value={formData.phone}
-                  onChange={(e) =>
-                    setFormData({ ...formData, phone: e.target.value })
-                  }
-                />
-                {errors.phone && (
-                  <p className="text-sm text-red-500">{errors.phone}</p>
-                )}
-              </div>
-
-              <div className="space-y-2">
-                <label htmlFor="message" className="text-sm font-medium">
-                  Message
-                </label>
-                <Textarea
-                  id="message"
-                  placeholder="Tell us about your project..."
-                  rows={6}
-                  value={formData.message}
-                  onChange={(e) =>
-                    setFormData({ ...formData, message: e.target.value })
-                  }
-                />
-                {errors.message && (
-                  <p className="text-sm text-red-500">{errors.message}</p>
-                )}
-              </div>
-
-              <Button
-                type="submit"
-                size="lg"
-                className="w-full bg-white hover:bg-gray-100 text-gray-900 border border-gray-200 transition-colors"
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? "Sending..." : "Send Message"}
-                {!isSubmitting && <Send className="ml-2 h-5 w-5" />}
-              </Button>
-            </form>
-          </Card>
         </div>
-      </div>
+      </section>
 
       {/* Success Modal */}
       {/* Success Modal */}
       {showSuccess && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-background/80 backdrop-blur-md animate-in fade-in duration-300">
-          <div className="relative w-full max-w-sm bg-linear-to-b from-background to-accent/5 rounded-3xl shadow-2xl border border-border/50 p-8 animate-in slide-in-from-bottom-8 zoom-in-95 duration-500 overflow-hidden">
+          <div className="relative w-full max-w-sm bg-gradient-to-b from-background to-accent/5 rounded-3xl shadow-2xl border border-border/50 p-8 animate-in slide-in-from-bottom-8 zoom-in-95 duration-500 overflow-hidden">
             {/* Decorative background glow */}
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-32 bg-primary/20 blur-3xl rounded-full -z-10" />
 
@@ -259,13 +274,13 @@ export function ContactSection() {
             <div className="flex flex-col items-center text-center space-y-6 pt-4">
               <div className="relative">
                 <div className="absolute inset-0 bg-green-500/20 blur-xl rounded-full" />
-                <div className="relative h-20 w-20 rounded-full bg-linear-to-br from-green-500 to-emerald-600 flex items-center justify-center shadow-lg transform transition-transform hover:scale-105 duration-300">
+                <div className="relative h-20 w-20 rounded-full bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center shadow-lg transform transition-transform hover:scale-105 duration-300">
                   <CheckCircle2 className="h-10 w-10 text-white" />
                 </div>
               </div>
 
               <div className="space-y-2">
-                <h3 className="text-2xl font-bold tracking-tight bg-clip-text text-transparent bg-linear-to-r from-foreground to-foreground/70">
+                <h3 className="text-2xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-foreground to-foreground/70">
                   Message Sent!
                 </h3>
                 <p className="text-muted-foreground text-sm leading-relaxed max-w-[250px] mx-auto">
@@ -286,6 +301,6 @@ export function ContactSection() {
           </div>
         </div>
       )}
-    </section>
+    </>
   );
 }

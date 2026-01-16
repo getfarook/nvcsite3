@@ -12,20 +12,36 @@ export function ScatteredBackground() {
   if (!mounted) return null;
 
   return (
-    <div className="fixed inset-0 z-[-1] overflow-hidden pointer-events-none select-none hidden dark:block">
-      {/* Global Blue Tint - Linear Gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[var(--gradient-blue)]/5 via-transparent to-[var(--gradient-blue)]/5 opacity-40 mix-blend-overlay" />
+    <div className="fixed inset-0 z-[-1] overflow-hidden pointer-events-none select-none">
+      {/* Top-left radial glow - Subtle ambient light */}
+      <div
+        className="absolute top-[-15%] left-[-10%] w-[45%] h-[45%] rounded-full blur-[110px] opacity-[0.08] dark:opacity-[0.14]"
+        style={{ background: 'var(--gradient-blue)' }}
+      />
 
-      {/* Global Blue Glow - Radial Gradient */}
-      <div className="absolute top-[-50%] left-[-20%] w-[100%] h-[100%] rounded-full bg-[radial-gradient(circle,var(--gradient-blue)_0%,transparent_70%)] opacity-[0.1]" />
-      <div className="absolute bottom-[-30%] right-[-10%] w-[80%] h-[80%] rounded-full bg-[radial-gradient(circle,var(--gradient-blue)_0%,transparent_70%)] opacity-[0.08]" />
+      {/* Top-right radial glow */}
+      <div
+        className="absolute top-[8%] right-[-15%] w-[35%] h-[35%] rounded-full blur-[100px] opacity-[0.06] dark:opacity-[0.12]"
+        style={{ background: 'var(--gradient-blue)' }}
+      />
 
-      {/* Scattered Blobs */}
-      <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-[var(--brand-primary)] opacity-[0.03] blur-[100px]" />
-      <div className="absolute top-[20%] right-[-5%] w-[30%] h-[30%] rounded-full bg-[var(--brand-primary)] opacity-[0.04] blur-[100px]" />
-      <div className="absolute bottom-[-10%] left-[20%] w-[50%] h-[50%] rounded-full bg-[var(--brand-primary)] opacity-[0.03] blur-[120px]" />
-      <div className="absolute top-[40%] left-[40%] w-[20%] h-[20%] rounded-full bg-[var(--brand-primary)] opacity-[0.02] blur-[80px]" />
-      <div className="absolute bottom-[10%] right-[10%] w-[35%] h-[35%] rounded-full bg-[var(--brand-primary)] opacity-[0.04] blur-[100px]" />
+      {/* Center radial glow */}
+      <div
+        className="absolute top-[38%] left-[28%] w-[35%] h-[35%] rounded-full blur-[130px] opacity-[0.05] dark:opacity-[0.10]"
+        style={{ background: 'var(--gradient-blue)' }}
+      />
+
+      {/* Bottom-left radial glow */}
+      <div
+        className="absolute bottom-[-20%] left-[-2%] w-[45%] h-[45%] rounded-full blur-[120px] opacity-[0.07] dark:opacity-[0.13]"
+        style={{ background: 'var(--gradient-blue)' }}
+      />
+
+      {/* Bottom-right radial glow */}
+      <div
+        className="absolute bottom-[8%] right-[-10%] w-[30%] h-[30%] rounded-full blur-[105px] opacity-[0.06] dark:opacity-[0.11]"
+        style={{ background: 'var(--gradient-blue)' }}
+      />
     </div>
   );
 }

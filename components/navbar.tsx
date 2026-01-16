@@ -29,7 +29,7 @@ export function Navbar() {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 ${THEME.navbar.border} ${THEME.navbar.background}`}
+      className={`fixed shadow-sm top-0 left-0 right-0 z-50 ${THEME.navbar.border} ${THEME.navbar.background}`}
     >
       <div className={`${THEME.spacing.container} ${THEME.spacing.section.px}`}>
         <div

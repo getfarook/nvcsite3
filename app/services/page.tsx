@@ -7,17 +7,18 @@ import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { SERVICES, PROCESS_STEPS, BENEFITS } from "@/lib/constants/services";
+import { NeuralNetworkBackground } from "@/components/neural-network-background";
+
+import { SERVICES, BENEFITS } from "@/lib/constants/services";
 
 export default function ServicesPage() {
   return (
     <main className="relative min-h-screen">
       <Navbar />
-      <div className="h-16" />
 
       {/* Hero Section */}
-      <section className="relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-accent/5 via-transparent to-transparent" />
+      <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 overflow-hidden">
+        <NeuralNetworkBackground spreadNearText />
         <div className="relative z-10 mx-auto max-w-7xl">
           <div className="text-center">
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-6 text-balance">

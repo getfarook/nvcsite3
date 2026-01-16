@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { ScatteredBackground } from "@/components/scattered-background";
-import { AiNodesSideMargins } from "@/components/ai-nodes-margin";
+import { NeuralNetworkSideMargins } from "@/components/neural-network-margin";
 import { ThemeProvider } from "@/components/theme-provider";
 import WelcomePopup from "@/components/welcome-popup";
 import "./globals.css";
@@ -116,8 +116,8 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <ScatteredBackground />
-          <AiNodesSideMargins />
-          <div className="lg:px-[5%]">{children}</div>
+          <NeuralNetworkSideMargins />
+          <div className="">{children}</div>
           <WelcomePopup />
           <Analytics />
         </ThemeProvider>

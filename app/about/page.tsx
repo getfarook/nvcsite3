@@ -15,49 +15,52 @@ import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { VALUES, TIMELINE, STATS } from "@/lib/constants/about";
+import { NeuralNetworkBackground } from "@/components/neural-network-background";
+
+import { VALUES } from "@/lib/constants/about";
 
 export default function AboutPage() {
   return (
     <main className="relative min-h-screen">
       <Navbar />
       {/* Navbar Spacer */}
-      <div className="h-16" />
 
-      {/* Hero Section */}
-      <section className="relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-accent/5 via-transparent to-transparent" />
-        <div className="relative z-10 mx-auto max-w-7xl">
+      {/* Our Story Hero Section */}
+      <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 overflow-hidden">
+        <NeuralNetworkBackground />
+        <div className="relative z-10 mx-auto max-w-7xl pt-24 pb-16">
+          {/* Section Header */}
           <div className="text-center mb-12">
+            <span className="inline-block px-4 py-2 rounded-full bg-accent/10 text-accent text-sm font-medium mb-4">
+              About Us
+            </span>
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-6 text-balance">
-              About{" "}
-              <span className="bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent">
-                NOVIZCO INFOTECH
+              Our{" "}
+              <span className="bg-gradient-to-r from-accent via-accent to-primary bg-clip-text text-transparent">
+                Story
               </span>
             </h1>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              Transforming businesses through innovative technology solutions
-              since 2019
-            </p>
           </div>
-        </div>
-      </section>
 
-      {/* Story Section with Image */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-muted/30">
-        <div className="mx-auto max-w-7xl">
+          {/* Content Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="relative h-[400px] rounded-2xl overflow-hidden">
+            {/* Image */}
+            <div className="relative h-[400px] lg:h-[500px] rounded-2xl overflow-hidden group">
               <Image
                 src="/images/about/team.png"
                 alt="NOVIZCO Team Collaboration"
                 fill
-                className="object-cover"
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
               />
             </div>
+
+            {/* Story Content */}
             <div>
-              <h2 className="text-3xl sm:text-4xl font-bold mb-6">Our Story</h2>
-              <div className="space-y-4 text-muted-foreground leading-relaxed">
+              <h2 className="text-2xl sm:text-3xl font-bold mb-6">
+                Transforming businesses since{" "}
+                <span className="text-accent">2019</span>
+              </h2>
+              <div className="space-y-5 text-muted-foreground leading-relaxed text-base sm:text-lg">
                 <p>
                   Founded in 2019, NOVIZCO INFOTECH emerged from a simple yet
                   powerful vision: to bridge the gap between cutting-edge
@@ -69,15 +72,26 @@ export default function AboutPage() {
                   We've built our reputation on delivering excellence. From web
                   and mobile applications to AI-powered solutions and cloud
                   infrastructure, we bring expertise, innovation, and dedication
-                  to every project. Our team of 50+ professionals works
-                  tirelessly to ensure your digital transformation journey is
-                  smooth, successful, and sustainable.
+                  to every project.
                 </p>
                 <p>
-                  Today, we're proud to have delivered over 500 projects,
-                  helping businesses of all sizes leverage technology to grow,
-                  compete, and thrive in the digital age.
+                  Today, we're proud to be trusted by businesses of all sizes,
+                  helping them leverage technology to grow, compete, and thrive
+                  in the digital age.
                 </p>
+              </div>
+
+              {/* CTA Button */}
+              <div className="mt-8">
+                <Link href="/contact">
+                  <Button
+                    size="lg"
+                    className="bg-accent hover:bg-accent/90 text-accent-foreground px-8 h-12"
+                  >
+                    Let's Work Together
+                    <ArrowRight className="ml-2 h-5 w-5" />
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>

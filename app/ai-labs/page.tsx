@@ -12,16 +12,18 @@ import {
   AI_LABS_INDUSTRIES,
   AI_STACK,
 } from "@/lib/constants/ai-labs";
+import { NeuralNetworkBackground } from "@/components/neural-network-background";
+
+// ... existing imports ...
 
 export default function AILabsPage() {
   return (
     <main className="relative min-h-screen">
       <Navbar />
-      <div className="h-16" />
 
       {/* Hero Section */}
-      <section className="relative py-24 px-4 sm:px-6 lg:px-8 overflow-hidden">
-        <div className="absolute inset-0 bg-linear-to-b from-purple-500/10 via-transparent to-transparent" />
+      <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 overflow-hidden">
+        <NeuralNetworkBackground spreadNearText />
         <div className="relative z-10 mx-auto max-w-7xl">
           <div className="text-center mb-16">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 border border-accent/20 mb-6">
@@ -30,15 +32,27 @@ export default function AILabsPage() {
                 Future of Technology
               </span>
             </div>
-            <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tight mb-6">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-6 text-balance">
               {AI_LABS_HERO.title}
               <span className="block text-2xl sm:text-3xl md:text-4xl mt-2 text-muted-foreground font-normal">
                 {AI_LABS_HERO.subtitle}
               </span>
             </h1>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed mb-8">
               {AI_LABS_HERO.description}
             </p>
+
+            <div className="flex items-center justify-center">
+              <Link href="/contact">
+                <Button
+                  size="lg"
+                  className="px-8 h-12 text-lg bg-white hover:bg-gray-100 text-gray-900 border border-gray-200"
+                >
+                  Start Your Project
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
       </section>
@@ -112,47 +126,40 @@ export default function AILabsPage() {
       </section>
 
       {/* Tech Stack */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-muted/30">
-        <div className="mx-auto max-w-7xl text-center">
-          <h2 className="text-2xl font-semibold mb-12">
-            Powered by Leading Technologies
-          </h2>
-          <div className="flex flex-wrap justify-center gap-4">
-            {AI_STACK.map((tech) => (
-              <div
-                key={tech}
-                className="flex items-center gap-2 px-6 py-3 rounded-full bg-background border border-border/50 shadow-sm"
-              >
-                <CheckCircle2 className="h-4 w-4 text-accent" />
-                <span className="font-medium">{tech}</span>
-              </div>
-            ))}
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-muted/30">
+        <div className="mx-auto max-w-7xl">
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20 mb-4">
+              <span className="text-sm font-medium text-accent">
+                Our Tech Stack
+              </span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-bold mb-4">
+              Powered by Leading Technologies
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              We leverage cutting-edge frameworks and tools to deliver
+              exceptional AI solutions
+            </p>
           </div>
-        </div>
-      </section>
 
-      {/* CTA Section */}
-      <section className="py-24 px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-4xl text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold mb-6">
-            Ready to Build Intelligent Solutions?
-          </h2>
-          <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Whether you need expert consulting for your project or want to
-            master AI through our hands-on training, we're here to help.
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link href="/contact">
-              <Button size="lg" className="px-8 h-12 text-lg">
-                Start Your Project
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-            </Link>
-            <Link href="/contact">
-              <Button size="lg" variant="outline" className="px-8 h-12 text-lg">
-                Join Training
-              </Button>
-            </Link>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+            {AI_STACK.map((tech, index) => (
+              <Card
+                key={tech}
+                className="group relative p-5 border-border/50 hover:border-accent/50 transition-all duration-300 hover:shadow-lg hover:shadow-accent/10 overflow-hidden"
+              >
+                {/* Gradient accent on hover */}
+                <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                <div className="relative flex flex-col items-center text-center gap-3">
+                  <div className="p-3 rounded-xl bg-accent/10 group-hover:bg-accent/20 transition-colors">
+                    <CheckCircle2 className="h-5 w-5 text-accent" />
+                  </div>
+                  <span className="font-medium text-sm">{tech}</span>
+                </div>
+              </Card>
+            ))}
           </div>
         </div>
       </section>

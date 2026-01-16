@@ -140,19 +140,11 @@ export function AiNodesMargin({
   return (
     <div
       ref={containerRef}
-      className={`fixed top-0 ${
-        side === "left" ? "left-0" : "right-0"
-      } h-screen z-50 pointer-events-none hidden lg:block`}
+      className={`fixed top-0 ${side === "left" ? "left-0" : "right-0"
+        } h-screen z-50 pointer-events-none hidden lg:block`}
       style={{ width }}
     >
-      {/* Gradient fade effect towards content */}
-      <div
-        className={`absolute inset-0 ${
-          side === "left"
-            ? "bg-linear-to-r from-transparent via-transparent to-background/50"
-            : "bg-linear-to-l from-transparent via-transparent to-background/50"
-        }`}
-      />
+
       <canvas ref={canvasRef} className="absolute inset-0" />
     </div>
   );

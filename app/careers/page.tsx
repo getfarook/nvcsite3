@@ -20,15 +20,16 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { JOB_OPENINGS, CAREER_HERO, JobOpening } from "@/lib/constants/careers";
+import { NeuralNetworkBackground } from "@/components/neural-network-background";
 
 export default function CareersPage() {
   const [selectedJob, setSelectedJob] = useState<JobOpening | null>(null);
-  const [isFormVisible, setIsFormVisible] = useState(false);
+  const [isFormVisible, setIsFormVisible] = useState(true);
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
     phone: "",
-    jobTitle: "",
+    jobTitle: "General Application",
     experience: "",
     description: "",
   });
@@ -170,15 +171,12 @@ export default function CareersPage() {
   return (
     <main className="relative min-h-screen">
       <Navbar />
-      <div className="h-16" />
 
       {/* Hero Section */}
-      <section className="relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
-        <div className="absolute inset-0 bg-linear-to-b from-accent/5 via-transparent to-transparent" />
-        <div className="absolute top-20 left-1/4 w-72 h-72 bg-linear-to-r from-purple-500/10 to-blue-500/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 right-1/4 w-96 h-96 bg-linear-to-r from-blue-500/10 to-teal-500/10 rounded-full blur-3xl" />
+      <section className="relative py-24 sm:py-32 flex items-center justify-center px-4 sm:px-6 lg:px-8 overflow-hidden">
+        <NeuralNetworkBackground />
 
-        <div className="relative z-10 mx-auto max-w-7xl">
+        <div className="relative z-10 mx-auto max-w-7xl mt-16">
           <div className="text-center">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20 mb-6">
               <Briefcase className="h-4 w-4 text-accent" />
@@ -189,7 +187,7 @@ export default function CareersPage() {
 
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-6 text-balance">
               {CAREER_HERO.title}{" "}
-              <span className="bg-linear-to-r from-foreground to-muted-foreground bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent">
                 {CAREER_HERO.subtitle}
               </span>
             </h1>
@@ -200,7 +198,7 @@ export default function CareersPage() {
         </div>
       </section>
 
-      {/* Job Openings Section */}
+      {/* Job Openings Section - COMMENTED OUT
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-muted/30">
         <div className="mx-auto max-w-7xl">
           <div className="text-center mb-16">
@@ -218,7 +216,6 @@ export default function CareersPage() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
-            {/* Job List - Left Side */}
             <div className="lg:col-span-2 space-y-3">
               {JOB_OPENINGS.map((job, index) => (
                 <div
@@ -230,7 +227,6 @@ export default function CareersPage() {
                       : "bg-background hover:bg-muted/80 border border-border/50 hover:border-accent/30"
                   }`}
                 >
-                  {/* Active indicator */}
                   {selectedJob?.id === job.id && (
                     <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-12 bg-white rounded-r-full" />
                   )}
@@ -303,11 +299,9 @@ export default function CareersPage() {
               ))}
             </div>
 
-            {/* Job Details - Right Side */}
             <div className="lg:col-span-3">
               {selectedJob ? (
                 <Card className="p-8 border-border/50 sticky top-24 animate-in fade-in slide-in-from-right-4 duration-300">
-                  {/* Header */}
                   <div className="flex items-start gap-4 mb-6 pb-6 border-b border-border/50">
                     <div className="p-4 rounded-2xl bg-accent/10">
                       <selectedJob.icon className="h-8 w-8 text-accent" />
@@ -332,7 +326,6 @@ export default function CareersPage() {
                     </div>
                   </div>
 
-                  {/* Meta Info */}
                   <div className="grid grid-cols-2 gap-4 mb-6">
                     <div className="p-4 rounded-xl bg-muted/50">
                       <div className="flex items-center gap-2 text-sm text-muted-foreground mb-1">
@@ -350,14 +343,12 @@ export default function CareersPage() {
                     </div>
                   </div>
 
-                  {/* Description */}
                   <div className="mb-6">
                     <p className="text-muted-foreground leading-relaxed">
                       {selectedJob.description}
                     </p>
                   </div>
 
-                  {/* Responsibilities */}
                   <div className="mb-6">
                     <h4 className="font-semibold text-lg mb-4">
                       What You'll Do
@@ -377,7 +368,6 @@ export default function CareersPage() {
                     </ul>
                   </div>
 
-                  {/* Requirements */}
                   <div className="mb-8">
                     <h4 className="font-semibold text-lg mb-4">
                       What You'll Need
@@ -397,7 +387,6 @@ export default function CareersPage() {
                     </ul>
                   </div>
 
-                  {/* Apply Button */}
                   <Button
                     onClick={() => handleApplyClick(selectedJob)}
                     size="lg"
@@ -425,6 +414,7 @@ export default function CareersPage() {
           </div>
         </div>
       </section>
+      */}
 
       {/* Application Form Section */}
       {isFormVisible && (
@@ -436,11 +426,9 @@ export default function CareersPage() {
             <Card className="p-8 md:p-12 border-border/50">
               <div className="flex items-center justify-between mb-8">
                 <div>
-                  <h2 className="text-2xl font-bold mb-2">
-                    Apply for {selectedJob?.title}
-                  </h2>
+                  <h2 className="text-2xl font-bold mb-2">Join Our Team</h2>
                   <p className="text-muted-foreground">
-                    Fill out the form below to submit your application
+                    Submit your application and we'll get back to you soon
                   </p>
                 </div>
                 <button
@@ -632,7 +620,7 @@ export default function CareersPage() {
         </section>
       )}
 
-      {/* CTA Section */}
+      {/* CTA Section - COMMENTED OUT
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-muted/30">
         <div className="mx-auto max-w-4xl">
           <Card className="p-12 border-border/50 text-center">
@@ -670,6 +658,7 @@ export default function CareersPage() {
           </Card>
         </div>
       </section>
+      */}
 
       {/* Success Modal */}
       {showSuccess && (

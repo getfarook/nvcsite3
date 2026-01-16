@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { TechStackMarquee } from "@/components/tech-stack-marquee";
 import { AiNodesBackground } from "@/components/ai-nodes-background";
+import { NeuralNetworkBackground } from "@/components/neural-network-background";
 import { HERO } from "@/lib/constants";
 import { THEME } from "@/lib/constants/theme";
 import Link from "next/link";
@@ -10,8 +11,8 @@ import Link from "next/link";
 export function HeroSection() {
   return (
     <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 overflow-hidden">
-      <div className="absolute inset-0 bg-linear-to-b from-accent/5 via-transparent to-transparent" />
-      <AiNodesBackground />
+      {/* <AiNodesBackground /> */}
+      <NeuralNetworkBackground spreadNearText />
 
       <div className="relative z-10 mx-auto max-w-5xl text-center pt-20 sm:pt-24 md:pt-28 pb-8 sm:pb-12 w-full">
         {/* Main Heading */}

@@ -38,7 +38,7 @@ export const THEME = {
 
   // Card styles
   card: {
-    base: "p-6 border-border/50 hover:border-accent/50 transition-all hover:shadow-xl hover:shadow-accent/5 group backdrop-blur-md bg-white/5",
+    base: "p-6 border-border/50 hover:border-accent/50 transition-all shadow-lg hover:shadow-xl hover:shadow-accent/5 group backdrop-blur-md bg-white/5",
   },
 
   // Button styles
@@ -50,7 +50,8 @@ export const THEME = {
   // Navbar styles
   navbar: {
     height: "h-16",
-    background: "bg-background/10 backdrop-blur-md border-b border-white/5 supports-[backdrop-filter]:bg-background/5",
+    background:
+      "bg-background/10 backdrop-blur-md border-b border-white/5 supports-[backdrop-filter]:bg-background/5",
     border: "border-b border-border/40",
   },
 } as const;
