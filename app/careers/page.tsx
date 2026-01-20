@@ -157,7 +157,7 @@ export default function CareersPage() {
       } else {
         alert(
           "Something went wrong: " +
-            (data.error || "Failed to submit application")
+            (data.error || "Failed to submit application"),
         );
       }
     } catch (error) {
@@ -178,10 +178,13 @@ export default function CareersPage() {
 
         <div className="relative z-10 mx-auto max-w-7xl mt-16">
           <div className="text-center">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20 mb-6">
-              <Briefcase className="h-4 w-4 text-accent" />
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/30 mb-6 shadow-[0_0_15px_rgba(var(--accent-rgb),0.3)] animate-pulse">
+              <span className="relative flex h-3 w-3">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+              </span>
               <span className="text-sm font-medium text-accent">
-                We're Hiring
+                Current Openings
               </span>
             </div>
 

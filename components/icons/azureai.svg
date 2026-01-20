@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+  <defs>
+    <linearGradient id="azureGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0078D4"/>
+      <stop offset="100%" style="stop-color:#00BCF2"/>
+    </linearGradient>
+  </defs>
+  <path fill="url(#azureGrad)" d="M60 200L120 40h30l-50 120h80L100 200H60zm80-40l56 40h-40l-16-40z"/>
+  <circle cx="180" cy="80" r="30" fill="#50E6FF"/>
+  <path fill="#0078D4" d="M180 60v40M160 80h40" stroke="#FFFFFF" stroke-width="4"/>
+</svg>

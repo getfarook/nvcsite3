@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
@@ -8,10 +9,12 @@ import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { NeuralNetworkBackground } from "@/components/neural-network-background";
+import { ContactPopup } from "@/components/contact-popup";
 
 import { SERVICES, BENEFITS } from "@/lib/constants/services";
 
 export default function ServicesPage() {
+  const [showContactPopup, setShowContactPopup] = useState(false);
   return (
     <main className="relative min-h-screen">
       <Navbar />
@@ -28,10 +31,21 @@ export default function ServicesPage() {
               </span>
             </h1>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              Comprehensive technology solutions designed to transform your
-              business. From concept to deployment, we deliver excellence at
-              every step.
+              We deliver full software projects and also provide skilled
+              developers and tech teams on demand. Whether it’s a complete build
+              or ongoing support, we help your business move faster with the
+              right technology.
             </p>
+            <div className="mt-8">
+              <Button
+                size="lg"
+                className="bg-white hover:bg-gray-100 text-gray-900 border border-gray-200 transition-colors px-8 h-12"
+                onClick={() => setShowContactPopup(true)}
+              >
+                Get Started
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
+            </div>
           </div>
         </div>
       </section>
@@ -44,8 +58,8 @@ export default function ServicesPage() {
               What We Offer
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Expert solutions across all aspects of modern technology
-              development
+              End-to-end software development and on-demand tech teams for your
+              growing business.
             </p>
           </div>
 
@@ -169,17 +183,16 @@ export default function ServicesPage() {
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
               </Link>
-              <Link href="/about">
-                <Button size="lg" variant="outline" className="px-8 h-12">
-                  Learn About Our Team
-                </Button>
-              </Link>
             </div>
           </Card>
         </div>
       </section>
 
       <Footer />
+      <ContactPopup
+        open={showContactPopup}
+        onOpenChange={setShowContactPopup}
+      />
     </main>
   );
 }

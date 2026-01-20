@@ -25,6 +25,7 @@ import {
   FileText,
   X,
   CheckCircle2,
+  ArrowRight,
 } from "lucide-react";
 
 import { useState } from "react";
@@ -48,7 +49,7 @@ export default function HireResourcePage() {
   const [emailError, setEmailError] = useState("");
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { id, value } = e.target;
     setFormData((prev) => ({ ...prev, [id]: value }));
@@ -162,15 +163,34 @@ export default function HireResourcePage() {
             </span>
           </h1>
           <p className="text-xl text-muted-foreground leading-relaxed">
-            Find the perfect resource for your project. Tell us your
-            requirements and we'll connect you with our expert developers,
-            designers, and engineers.
+            Find the perfect contract resource for your projects. Tell us your
+            requirements and we’ll connect you with our Full Stack Developers,
+            Solutions Architects and AI Engineers. Resource augmentation is one
+            of our core services, where we provide fully managed resources
+            aligned with your team's time zone.
           </p>
+          <div className="mt-8">
+            <Button
+              size="lg"
+              className="bg-white hover:bg-gray-100 text-gray-900 border border-gray-200 transition-colors px-8 h-12"
+              onClick={() => {
+                document
+                  .getElementById("hire-form")
+                  ?.scrollIntoView({ behavior: "smooth" });
+              }}
+            >
+              Hire Resource
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
+          </div>
         </div>
       </section>
 
       {/* Form Section */}
-      <section className="py-12 px-4 sm:px-6 lg:px-8">
+      <section
+        id="hire-form"
+        className="py-12 px-4 sm:px-6 lg:px-8 scroll-mt-20"
+      >
         <div className="mx-auto max-w-2xl">
           <Card className="p-8 border-border/50 backdrop-blur-sm bg-background/50">
             <form onSubmit={handleSubmit} className="space-y-8">

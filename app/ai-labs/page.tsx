@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
@@ -13,10 +14,10 @@ import {
   AI_STACK,
 } from "@/lib/constants/ai-labs";
 import { NeuralNetworkBackground } from "@/components/neural-network-background";
-
-// ... existing imports ...
+import { ContactPopup } from "@/components/contact-popup";
 
 export default function AILabsPage() {
+  const [showContactPopup, setShowContactPopup] = useState(false);
   return (
     <main className="relative min-h-screen">
       <Navbar />
@@ -29,7 +30,7 @@ export default function AILabsPage() {
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 border border-accent/20 mb-6">
               <Bot className="h-4 w-4 text-accent" />
               <span className="text-sm font-medium text-accent">
-                Future of Technology
+                AI Research & Development
               </span>
             </div>
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-6 text-balance">
@@ -43,15 +44,14 @@ export default function AILabsPage() {
             </p>
 
             <div className="flex items-center justify-center">
-              <Link href="/contact">
-                <Button
-                  size="lg"
-                  className="px-8 h-12 text-lg bg-white hover:bg-gray-100 text-gray-900 border border-gray-200"
-                >
-                  Start Your Project
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
-              </Link>
+              <Button
+                size="lg"
+                className="px-8 h-12 text-lg bg-white hover:bg-gray-100 text-gray-900 border border-gray-200"
+                onClick={() => setShowContactPopup(true)}
+              >
+                Start Your Project
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
             </div>
           </div>
         </div>
@@ -63,19 +63,23 @@ export default function AILabsPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-3xl sm:text-4xl font-bold mb-6">
-                Shaping the Next Decade
+                AI Built for Real-World Action
               </h2>
               <div className="prose prose-lg dark:prose-invert text-muted-foreground">
                 <p className="mb-6">
-                  AI and Machine Learning will impact almost all segments of
-                  life by the beginning of the next decade. The current and
-                  future demand for skilled human resources in this area is
-                  staggering.
+                  Novizco works at the forefront of Generative AI and Agentic
+                  AI, helping businesses move from basic automation to
+                  intelligent, decision-driven systems. We design and implement
+                  AI agents that can reason, act, and collaborate across
+                  workflows—powering smarter operations, faster responses, and
+                  better outcomes.
                 </p>
                 <p>
-                  AI plays a pivotal role in addressing the business challenges
-                  of the new era. From finance to healthcare, intelligent
-                  systems are revolutionizing how we work and live.
+                  From conversational intelligence to autonomous agents
+                  integrated with business systems, our AI solutions are built
+                  for real-world use, scalability, and trust. We help
+                  organizations adopt GenAI not as an experiment, but as a
+                  dependable part of their core technology stack.
                 </p>
               </div>
             </div>
@@ -137,7 +141,7 @@ export default function AILabsPage() {
             <h2 className="text-3xl sm:text-4xl font-bold mb-4">
               Powered by Leading Technologies
             </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
               We leverage cutting-edge frameworks and tools to deliver
               exceptional AI solutions
             </p>
@@ -165,6 +169,10 @@ export default function AILabsPage() {
       </section>
 
       <Footer />
+      <ContactPopup
+        open={showContactPopup}
+        onOpenChange={setShowContactPopup}
+      />
     </main>
   );
 }

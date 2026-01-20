@@ -53,6 +53,13 @@ export function NeuralNetworkBackground({
     let width = 0;
     let height = 0;
 
+    // Network variants with different node configurations (input, hidden, output)
+    const networkVariants = [
+      { input: 3, hidden: 4, output: 2 }, // Original variant
+      // { input: 4, hidden: 6, output: 3 }, // Medium variant
+      // { input: 5, hidden: 7, output: 2 }, // Large variant
+    ];
+
     const createNetwork = (
       centerX: number,
       centerY: number,
@@ -60,11 +67,15 @@ export function NeuralNetworkBackground({
     ): NeuralNetwork => {
       const nodes: NetworkNode[] = [];
 
-      // Network structure configuration
+      // Randomly select a network variant
+      const variant =
+        networkVariants[Math.floor(Math.random() * networkVariants.length)];
+
+      // Network structure configuration based on selected variant
       const layers = [
-        { name: "input" as const, nodeCount: 3, xOffset: -90 },
-        { name: "hidden" as const, nodeCount: 4, xOffset: 0 },
-        { name: "output" as const, nodeCount: 2, xOffset: 90 },
+        { name: "input" as const, nodeCount: variant.input, xOffset: -90 },
+        { name: "hidden" as const, nodeCount: variant.hidden, xOffset: 0 },
+        { name: "output" as const, nodeCount: variant.output, xOffset: 90 },
       ];
 
       const nodeRadius = 6 * scale;
@@ -111,7 +122,8 @@ export function NeuralNetworkBackground({
     const initNetworks = () => {
       const networks: NeuralNetwork[] = [];
       // Create multiple neural networks based on screen size
-      const networkCount = Math.max(6, Math.floor((width * height) / 150000));
+      const networkCount = Math.max(6, Math.floor((width * height) / 250000));
+      console.log(networkCount, "count");
 
       // Define center exclusion zone (where text content is)
       // Use smaller zone if spreadNearText is true to allow nodes closer to center
@@ -123,21 +135,77 @@ export function NeuralNetworkBackground({
       const centerZoneBottom = centerZoneTop + centerZoneHeight;
 
       for (let i = 0; i < networkCount; i++) {
-        // Spawn networks only on left or right sides, avoiding center
+        // Spawn networks in random zones around the edges, avoiding center
         let x, y;
-        const spawnOnLeft = Math.random() > 0.5;
+        const padding = 100;
 
-        if (spawnOnLeft) {
-          x = Math.random() * (centerZoneLeft - 80); // Left side
-        } else {
-          x =
-            centerZoneRight +
-            80 +
-            Math.random() * (width - centerZoneRight - 80); // Right side
+        // Randomly choose spawn zone: 0=left, 1=right, 2=top, 3=bottom, 4=corners
+        const spawnZone = Math.floor(Math.random() * 5);
+
+        switch (spawnZone) {
+          case 0: // Left side
+            x = padding + Math.random() * (centerZoneLeft - padding * 2);
+            y = padding + Math.random() * (height - padding * 2);
+            break;
+          case 1: // Right side
+            x =
+              centerZoneRight +
+              padding +
+              Math.random() * (width - centerZoneRight - padding * 2);
+            y = padding + Math.random() * (height - padding * 2);
+            break;
+          case 2: // Top area
+            x = padding + Math.random() * (width - padding * 2);
+            y = padding + Math.random() * (centerZoneTop - padding);
+            break;
+          case 3: // Bottom area
+            x = padding + Math.random() * (width - padding * 2);
+            y =
+              centerZoneBottom +
+              Math.random() * (height - centerZoneBottom - padding);
+            break;
+          case 4: // Corners (random corner)
+            const corner = Math.floor(Math.random() * 4);
+            if (corner === 0) {
+              // Top-left
+              x = padding + Math.random() * (centerZoneLeft - padding);
+              y = padding + Math.random() * (centerZoneTop - padding);
+            } else if (corner === 1) {
+              // Top-right
+              x =
+                centerZoneRight +
+                Math.random() * (width - centerZoneRight - padding);
+              y = padding + Math.random() * (centerZoneTop - padding);
+            } else if (corner === 2) {
+              // Bottom-left
+              x = padding + Math.random() * (centerZoneLeft - padding);
+              y =
+                centerZoneBottom +
+                Math.random() * (height - centerZoneBottom - padding);
+            } else {
+              // Bottom-right
+              x =
+                centerZoneRight +
+                Math.random() * (width - centerZoneRight - padding);
+              y =
+                centerZoneBottom +
+                Math.random() * (height - centerZoneBottom - padding);
+            }
+            break;
+          default:
+            x = Math.random() * width;
+            y = Math.random() * height;
         }
 
-        y = Math.random() * height;
-        const scale = 0.5 + Math.random() * 0.6; // Random size variation
+        // Add extra randomness to position
+        x += (Math.random() - 0.5) * 50;
+        y += (Math.random() - 0.5) * 50;
+
+        // Keep within bounds
+        x = Math.max(padding, Math.min(width - padding, x));
+        y = Math.max(padding, Math.min(height - padding, y));
+
+        const scale = 0.4 + Math.random() * 0.7; // More varied size (0.4 to 1.1)
         networks.push(createNetwork(x, y, scale));
       }
 
@@ -261,7 +329,7 @@ export function NeuralNetworkBackground({
 
         // Calculate global pulse phase for this network (cycles through 0-1)
         // Full cycle: input(0-0.2) -> line1(0.2-0.4) -> hidden(0.4-0.6) -> line2(0.6-0.8) -> output(0.8-1.0)
-        const cycleSpeed = 0.008;
+        const cycleSpeed = 0.003;
         const globalPhase = (timeRef.current * cycleSpeed) % 1;
 
         // Draw connections: Input -> Hidden

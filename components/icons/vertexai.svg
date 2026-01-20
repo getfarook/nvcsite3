@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+  <defs>
+    <linearGradient id="vertexGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4285F4"/>
+      <stop offset="50%" style="stop-color:#34A853"/>
+      <stop offset="100%" style="stop-color:#FBBC04"/>
+    </linearGradient>
+  </defs>
+  <path fill="url(#vertexGrad)" d="M128 20L40 80v96l88 60 88-60V80L128 20zm0 30l58 40v60l-58 40-58-40V90l58-40z"/>
+  <polygon fill="#4285F4" points="128,70 186,110 186,130 128,170 70,130 70,110"/>
+  <polygon fill="#34A853" points="128,100 156,118 156,140 128,158 100,140 100,118"/>
+  <circle cx="128" cy="128" r="16" fill="#EA4335"/>
+</svg>

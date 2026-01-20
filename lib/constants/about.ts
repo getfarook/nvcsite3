@@ -30,39 +30,21 @@ export interface Stat {
 export const VALUES: Value[] = [
   {
     icon: Target,
-    title: "Innovation First",
+    title: "Integrity",
     description:
-      "We constantly push boundaries with cutting-edge technology and creative solutions that drive real business value.",
+      "We do what we promise, with honesty and accountability. Every decision, communication, and delivery is guided by trust and transparency - ensuring long-term, meaningful partnerships.",
   },
   {
     icon: Users,
-    title: "Client-Centric",
+    title: "Competency",
     description:
-      "Your success is our priority. We build lasting partnerships through exceptional service and dedication.",
+      "We bring deep technical expertise and continuous learning to every project. From AI to full-stack engineering, we focus on delivering solutions that are accurate, reliable, and built to last.",
   },
   {
     icon: Award,
-    title: "Quality Driven",
+    title: "Speed",
     description:
-      "Uncompromising standards in code quality, design excellence, and project delivery every single time.",
-  },
-  {
-    icon: TrendingUp,
-    title: "Growth Focused",
-    description:
-      "Empowering businesses to scale and thrive in the ever-evolving digital landscape.",
-  },
-  {
-    icon: Shield,
-    title: "Trust & Integrity",
-    description:
-      "Building relationships on transparency, honesty, and ethical business practices.",
-  },
-  {
-    icon: Heart,
-    title: "Passion & Purpose",
-    description:
-      "We love what we do, and it shows in every project we undertake and every client we serve.",
+      "We move fast without compromising quality. Through agile execution and efficient workflows, we help businesses accelerate their roadmap and turn ideas into working solutions quickly.",
   },
 ];
 

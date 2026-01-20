@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -16,10 +17,12 @@ import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { NeuralNetworkBackground } from "@/components/neural-network-background";
+import { ContactPopup } from "@/components/contact-popup";
 
 import { VALUES } from "@/lib/constants/about";
 
 export default function AboutPage() {
+  const [showContactPopup, setShowContactPopup] = useState(false);
   return (
     <main className="relative min-h-screen">
       <Navbar />
@@ -83,15 +86,14 @@ export default function AboutPage() {
 
               {/* CTA Button */}
               <div className="mt-8">
-                <Link href="/contact">
-                  <Button
-                    size="lg"
-                    className="bg-accent hover:bg-accent/90 text-accent-foreground px-8 h-12"
-                  >
-                    Let's Work Together
-                    <ArrowRight className="ml-2 h-5 w-5" />
-                  </Button>
-                </Link>
+                <Button
+                  size="lg"
+                  className="bg-accent hover:bg-accent/90 text-accent-foreground px-8 h-12"
+                  onClick={() => setShowContactPopup(true)}
+                >
+                  Let's Work Together
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
               </div>
             </div>
           </div>
@@ -121,11 +123,10 @@ export default function AboutPage() {
               </div>
               <h3 className="text-2xl font-bold mb-4">Our Vision</h3>
               <p className="text-muted-foreground leading-relaxed">
-                To be India's most trusted technology partner, recognized for
-                transforming businesses through innovation, excellence, and
-                sustainable digital solutions. We envision a future where every
-                business, regardless of size, can harness the full potential of
-                modern technology.
+                To become a trusted global technology partner known for
+                converting ideas into intelligent digital systems. We strive to
+                lead the shift toward AI, autonomous solutions, and modern
+                engineering that empowers businesses to grow confidently.
               </p>
             </Card>
           </div>
@@ -160,30 +161,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Innovation Image */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-5xl">
-          <div className="relative h-[300px] md:h-[400px] rounded-2xl overflow-hidden">
-            <Image
-              src="/images/about/innovation.png"
-              alt="Innovation and Technology"
-              fill
-              className="object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/50 to-transparent flex items-end">
-              <div className="p-8 text-center w-full">
-                <h3 className="text-2xl sm:text-3xl font-bold mb-2">
-                  Innovating for Tomorrow
-                </h3>
-                <p className="text-muted-foreground">
-                  Building the future of technology, one solution at a time
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* CTA Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-muted/30">
         <div className="mx-auto max-w-4xl text-center">
@@ -195,25 +172,23 @@ export default function AboutPage() {
             innovative technology solutions
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link href="/contact">
-              <Button
-                size="lg"
-                className="bg-white hover:bg-gray-100 text-gray-900 border border-gray-200 transition-colors px-8 h-12"
-              >
-                Get In Touch
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-            </Link>
-            <Link href="/">
-              <Button size="lg" variant="outline" className="px-8 h-12">
-                View Services
-              </Button>
-            </Link>
+            <Button
+              size="lg"
+              className="bg-white hover:bg-gray-100 text-gray-900 border border-gray-200 transition-colors px-8 h-12"
+              onClick={() => setShowContactPopup(true)}
+            >
+              Get In Touch
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
           </div>
         </div>
       </section>
 
       <Footer />
+      <ContactPopup
+        open={showContactPopup}
+        onOpenChange={setShowContactPopup}
+      />
     </main>
   );
 }

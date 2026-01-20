@@ -4,6 +4,7 @@ import {
   Palette,
   Brain,
   Cloud,
+  Globe,
   Zap,
   Linkedin,
   Twitter,
@@ -11,14 +12,17 @@ import {
   Facebook,
   Youtube,
 } from "lucide-react";
-import ReactLogo from "@/components/icons/react.svg";
-import NextLogo from "@/components/icons/nextjs2.svg";
-import NodeLogo from "@/components/icons/nodejs.svg";
-import TypescriptLogo from "@/components/icons/typescript.svg";
-import TailwindLogo from "@/components/icons/tailwindcss.svg";
 import FlutterLogo from "@/components/icons/flutter.svg";
-import AWSLogo from "@/components/icons/aws.svg";
-import FigmaLogo from "@/components/icons/figma.svg";
+import ReactLogo from "@/components/icons/react.svg";
+import NodeLogo from "@/components/icons/nodejs.svg";
+import TensorflowLogo from "@/components/icons/tensorflow.svg";
+import LangchainLogo from "@/components/icons/langchain.svg";
+import HuggingFaceLogo from "@/components/icons/huggingface.svg";
+import BedrockLogo from "@/components/icons/bedrock.svg";
+import VertexAILogo from "@/components/icons/vertexai.svg";
+import AzureAILogo from "@/components/icons/azureai.svg";
+import OllamaLogo from "@/components/icons/ollama.svg";
+import PytorchLogo from "@/components/icons/pytorch.svg";
 
 /**
  * Company Information
@@ -28,7 +32,7 @@ export const COMPANY = {
   logo: "/images/novizco-logo.png",
   tagline: "Technology Solutions & Innovation",
   description:
-    "We are a reliable, fast delivering and high performance technology partner for our valuable customers across multiple verticals like Healthcare, Petroleum, Finance, Construction, Retail, Travel and Tourism, Logistics etc.",
+    "Novizco is an AI-driven full-stack technology company offering AI development, evaluation, red-teaming, web and mobile app development, data engineering, cloud services, and production support. We work with clients across many industries to deliver reliable, scalable technology built for real-world use.",
   year: new Date().getFullYear(),
 } as const;
 
@@ -40,8 +44,8 @@ export const NAVIGATION = {
     { href: "/", label: "Home" },
     { href: "/services", label: "Services" },
     { href: "/ai-labs", label: "AI Labs" },
-    { href: "/about", label: "About" },
-    { href: "/blog", label: "Blog" },
+    { href: "/about", label: "About us" },
+    { href: "/blog", label: "Blogs" },
     { href: "/careers", label: "Careers" },
     { href: "/contact", label: "Contact" },
   ],
@@ -59,14 +63,17 @@ export interface TechStackItem {
 
 // Tech stack for marquee
 export const TECH_STACK: TechStackItem[] = [
-  { name: "React", icon: ReactLogo },
-  { name: "Next.js", icon: NextLogo },
-  { name: "Node.js", icon: NodeLogo },
-  { name: "Typescript", icon: TypescriptLogo },
-  { name: "Tailwind", icon: TailwindLogo },
   { name: "Flutter", icon: FlutterLogo },
-  { name: "AWS", icon: AWSLogo },
-  { name: "Figma", icon: FigmaLogo },
+  { name: "React", icon: ReactLogo },
+  { name: "Node", icon: NodeLogo },
+  { name: "TensorFlow", icon: TensorflowLogo },
+  { name: "LangChain", icon: LangchainLogo },
+  { name: "Hugging Face", icon: HuggingFaceLogo },
+  { name: "Amazon Bedrock", icon: BedrockLogo },
+  { name: "Google Vertex AI", icon: VertexAILogo },
+  { name: "Microsoft AI Foundry", icon: AzureAILogo },
+  { name: "Ollama", icon: OllamaLogo },
+  { name: "PyTorch", icon: PytorchLogo },
 ];
 
 /**
@@ -97,17 +104,19 @@ export const SOCIAL_LINKS = {
 export const FOOTER = {
   quickLinks: [
     { label: "Services", href: "/services" },
+    {label: "AI Labs", href:"/ai-labs"},
     { label: "About Us", href: "/about" },
     { label: "Careers", href: "/careers" },
     { label: "Contact", href: "/contact" },
   ],
   services: [
-    "Web Application Development",
-    "Mobile App Development",
-    "UI/UX Designing",
+    "Artificial Intelligence (AI) Development",
+    "AI Evaluation & Red-Teaming",
+    "Web and Mobile Application Development",
+    "Full-Stack Engineering",
+    "Data Engineering & Analytics",
     "Cloud Platform Consulting",
-    "Digital Content Designing",
-    "Artificial Intelligence",
+    "Resource Augmentation",
   ],
 } as const;
 
@@ -124,7 +133,7 @@ export const HERO = {
     highlight: "Technology Solutions",
   },
   description:
-    "NOVIZCO is a technology services company focused on Web Applications, Mobile Applications, UI UX and Cloud Platform Services. We are full stack development experts on technologies like Flutter, React Native, ReactJS, Go, NodeJS, Amazon AWS and Google Cloud Platform.",
+    "Novizco is an AI-driven full-stack technology company. We help our clients build, test, and evaluate AI-enabled web and mobile applications. We also provide data engineering and cloud solutions on Azure, AWS, and GCP. At Novizco, we deliver end-to-end projects or fully managed resources based on customer needs.",
   ctas: [
     {
       label: "Contact us",
@@ -151,18 +160,19 @@ export const HERO = {
 /**
  * Scroll Reveal Text Content
  */
+//
 export const SCROLL_REVEAL = {
   sections: [
     {
-      text: "We are a reliable, fast delivering and high performance ",
+      text: "Trusted by global partners for securescalable,",
       speed: 1.7, // normal speed
     },
     {
-      text: "technology partner for our valuable customers. ",
+      text: " and high-quality software solutions.",
       speed: 3.2, // faster speed
     },
     {
-      text: "Adopt the latest technologies into your business.",
+      text: "We help teams innovate at the right pace.",
       speed: 1.7, // normal speed
     },
   ],
@@ -184,69 +194,82 @@ export const SERVICES = {
   items: [
     {
       icon: Code,
-      title: "Web Application Development",
+      title: "AI and Machine Learning",
       description:
-        "We are a full-stack web application development company strongly striving to create extra smart and reliable web applications that are well-tailored to your business needs.",
+        "We help our clients design and build practical AI solutions that automate workflows, and solve real business problems.",
       features: [
-        "React & Next.js",
-        "Node.js Backend",
-        "API Development",
-        "Progressive Web Apps",
+        "LLM Fine-tuning",
+        "Hybrid RAG Development",
+        "Custom AI Chatbots",
+        "Data Analysis and Pre-processing",
+        "AI enabled Web & Mobile Apps",
       ],
     },
     {
       icon: Smartphone,
       title: "Mobile Application Development",
       description:
-        "Your Perfect Technology Partner in Building Futuristic Mobile Apps with Flutter and other top Frameworks. The world runs on smartphones.",
+        "Your trusted partner for building scalable, future-ready mobile apps with Flutter and other modern frameworks.",
       features: [
-        "Flutter Development",
-        "Native Performance",
-        "Cross-Platform",
-        "App Store Optimization",
+        "Flutter Apps (Android, iOS, Web)",
+        "React Native Apps",
+        "Native Android & iOS (Kotlin, Swift)",
+        "API & Backend Integration",
+        "DevOps & Deployment",
+        "Post-Production Support",
       ],
     },
     {
-      icon: Palette,
-      title: "UI/UX Designing",
+      icon: Globe,
+      title: "Web Application Development",
       description:
-        "Do you want to build sleek, intuitive and compelling UI/UX Designs that create everlasting impact for your applications? Switch to NOVIZCO’s design expertise.",
+        "​​Web applications built with clean architecture and strong performance. From frontend to backend, our solutions are reliable, robust and scalable.",
       features: [
-        "User Research",
-        "Wireframing",
-        "Prototyping",
-        "Design Systems",
+        "Frontend Development (React, Next, Angular, Flutter)",
+        "Backend Development (Node.js, Python, Java)",
+        "REST & GraphQL API Development",
+        "Cloud-Native Deployment (AWS, Azure, GCP)",
+        "Progressive Web Apps (PWA)",
       ],
     },
     {
       icon: Brain,
-      title: "AI Labs",
+      title: "AI Evaluation & Red-Teaming",
       description:
-        "Leverage artificial intelligence and machine learning to solve complex problems. From predictive analytics to natural language processing.",
+        "We test and evaluate AI systems before they go live. With evaluation and red-teaming, we uncover risks and make sure the AI is safe and reliable.",
       features: [
-        "Machine Learning",
-        "AI Integration",
-        "Data Analytics",
-        "Automation",
+        "AI Model Evaluation",
+        "Prompt & Response Testing",
+        "Bias & Safety Assessment",
+        "Red-Teaming",
+        "Latency & Performance",
       ],
     },
     {
       icon: Cloud,
-      title: "Cloud Solutions",
+      title: "Cloud Engineering",
       description:
-        "Scalable cloud infrastructure and deployment strategies. Optimize performance, security, and cost-efficiency with modern cloud platforms.",
-      features: ["AWS & Azure", "DevOps", "CI/CD Pipelines", "Cloud Migration"],
+        "We manage cloud setups that help your apps run reliably. We ensure strong performance, good security, and efficient cloud spending.",
+      features: [
+        "AWS, Azure & GCP",
+        "Cloud Architecture",
+        "DevOps & CI/CD",
+        "Containerization",
+        "Cloud Migration",
+        "Monitoring & Cost Optimization",
+      ],
     },
     {
       icon: Zap,
-      title: "Performance Optimization",
+      title: "Data Engineering",
       description:
-        "Maximize application speed and efficiency. Expert optimization for faster load times, better SEO, and enhanced user satisfaction.",
+        "Novizco builds reliable data pipelines that turn raw data into clear insights, with a focus on accuracy, performance, and scalability for analytics and AI.",
       features: [
-        "Speed Optimization",
-        "SEO Enhancement",
-        "Code Refactoring",
-        "Monitoring",
+        "Data Pipeline Development",
+        "ETL / ELT Workflows",
+        "Data Warehousing & Modeling",
+        "Azure Data Engineering",
+        "GCP Data flow and AWS Glue",
       ],
     },
   ],
