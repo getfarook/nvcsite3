@@ -56,19 +56,19 @@ export function NeuralNetworkBackground({
     const createNetwork = (
       centerX: number,
       centerY: number,
-      scale: number
+      scale: number,
     ): NeuralNetwork => {
       const nodes: NetworkNode[] = [];
 
       // Network structure configuration
       const layers = [
-        { name: "input" as const, nodeCount: 3, xOffset: -60 },
+        { name: "input" as const, nodeCount: 3, xOffset: -90 },
         { name: "hidden" as const, nodeCount: 4, xOffset: 0 },
-        { name: "output" as const, nodeCount: 2, xOffset: 60 },
+        { name: "output" as const, nodeCount: 2, xOffset: 90 },
       ];
 
       const nodeRadius = 6 * scale;
-      const verticalSpacing = 25 * scale;
+      const verticalSpacing = 40 * scale;
 
       layers.forEach((layer) => {
         const layerHeight = (layer.nodeCount - 1) * verticalSpacing;
@@ -200,7 +200,7 @@ export function NeuralNetworkBackground({
             distToLeft,
             distToRight,
             distToTop,
-            distToBottom
+            distToBottom,
           );
 
           if (minDist === distToLeft) {
@@ -225,7 +225,7 @@ export function NeuralNetworkBackground({
         // Limit velocity
         const maxSpeed = 0.35;
         const speed = Math.sqrt(
-          network.vx * network.vx + network.vy * network.vy
+          network.vx * network.vx + network.vy * network.vy,
         );
         if (speed > maxSpeed) {
           network.vx = (network.vx / speed) * maxSpeed;
@@ -273,7 +273,7 @@ export function NeuralNetworkBackground({
               hiddenNode,
               theme,
               globalPhase,
-              "input-hidden"
+              "input-hidden",
             );
           });
         });
@@ -287,7 +287,7 @@ export function NeuralNetworkBackground({
               outputNode,
               theme,
               globalPhase,
-              "hidden-output"
+              "hidden-output",
             );
           });
         });
@@ -307,7 +307,7 @@ export function NeuralNetworkBackground({
       to: NetworkNode,
       theme: string | undefined,
       globalPhase: number,
-      connectionType: "input-hidden" | "hidden-output"
+      connectionType: "input-hidden" | "hidden-output",
     ) => {
       const angle = Math.atan2(to.y - from.y, to.x - from.x);
 
@@ -317,42 +317,59 @@ export function NeuralNetworkBackground({
       const endX = to.x - Math.cos(angle) * to.radius;
       const endY = to.y - Math.sin(angle) * to.radius;
 
-      // Sequential pulse timing - continuous flow:
-      // input-hidden connections active during phase 0-0.5
-      // hidden-output connections active during phase 0.5-1.0
-      let drawProgress = 0; // 0 to 1, how much of the line is drawn
-      let isActive = false;
+      // Continuous light flow timing:
+      // The light travels from input -> hidden -> output as one continuous journey
+      // Phase 0-0.45: light travels through input-hidden connections
+      // Phase 0.45-0.9: light travels through hidden-output connections
+      // Phase 0.9-1.0: everything fades out after reaching output
+
+      let drawProgress = 0; // 0 to 1, how much of the line is drawn (bright)
+      let lightHeadPosition = -1; // Position of the light head on this segment
+      let fadeOutOpacity = 1; // For fading out at the end
 
       if (connectionType === "input-hidden") {
-        // Active during phase 0-0.5
-        if (globalPhase <= 0.5) {
-          drawProgress = globalPhase / 0.5;
-          isActive = true;
-        } else {
-          // Keep line fully drawn after animation
+        if (globalPhase <= 0.45) {
+          // Light is traveling through this segment
+          drawProgress = globalPhase / 0.45;
+          lightHeadPosition = drawProgress;
+        } else if (globalPhase <= 0.9) {
+          // Light has passed through, line stays fully bright
           drawProgress = 1;
+        } else {
+          // Fade out phase after reaching output
+          drawProgress = 1;
+          fadeOutOpacity = 1 - (globalPhase - 0.9) / 0.1;
         }
       } else {
-        // hidden-output: Active during phase 0.5-1.0
-        if (globalPhase >= 0.5) {
-          drawProgress = (globalPhase - 0.5) / 0.5;
-          isActive = true;
+        // hidden-output
+        if (globalPhase < 0.45) {
+          // Light hasn't reached this segment yet
+          drawProgress = 0;
+        } else if (globalPhase <= 0.9) {
+          // Light is traveling through this segment
+          drawProgress = (globalPhase - 0.45) / 0.45;
+          lightHeadPosition = drawProgress;
+        } else {
+          // Fade out phase after reaching output
+          drawProgress = 1;
+          fadeOutOpacity = 1 - (globalPhase - 0.9) / 0.1;
         }
       }
+
+      // Clamp values
+      drawProgress = Math.max(0, Math.min(1, drawProgress));
+      fadeOutOpacity = Math.max(0, Math.min(1, fadeOutOpacity));
 
       // Calculate the current end point based on draw progress
       const currentEndX = startX + (endX - startX) * drawProgress;
       const currentEndY = startY + (endY - startY) * drawProgress;
 
-      // Base and active opacity
+      // Base opacity (faint line always visible)
       const baseOpacity = 0.08;
-      const activeOpacity = isActive
-        ? 0.35
-        : drawProgress > 0
-        ? 0.2
-        : baseOpacity;
+      // Bright opacity for the drawn/lit portion
+      const brightOpacity = 0.5 * fadeOutOpacity;
 
-      // Draw the base line (faint, full length)
+      // Draw the base line (faint, full length) - always visible
       ctx.beginPath();
       ctx.moveTo(startX, startY);
       ctx.lineTo(endX, endY);
@@ -363,53 +380,75 @@ export function NeuralNetworkBackground({
       ctx.lineWidth = 1;
       ctx.stroke();
 
-      // Draw the active/drawn portion of the line
+      // Draw the bright lit portion of the line (stays bright once drawn)
       if (drawProgress > 0) {
         ctx.beginPath();
         ctx.moveTo(startX, startY);
         ctx.lineTo(currentEndX, currentEndY);
         ctx.strokeStyle =
           theme === "dark"
-            ? `rgba(249, 115, 22, ${activeOpacity})`
-            : `rgba(100, 120, 150, ${activeOpacity})`;
-        ctx.lineWidth = isActive ? 2 : 1.5;
+            ? `rgba(255, 150, 80, ${brightOpacity})`
+            : `rgba(130, 150, 180, ${brightOpacity})`;
+        ctx.lineWidth = 2.5;
         ctx.stroke();
+      }
 
-        // Draw a bright leading edge when actively drawing
-        if (isActive && drawProgress > 0.02 && drawProgress < 0.98) {
-          const edgeLength = 0.15; // Length of the bright edge as fraction
-          const edgeStart = Math.max(0, drawProgress - edgeLength);
-          const edgeStartX = startX + (endX - startX) * edgeStart;
-          const edgeStartY = startY + (endY - startY) * edgeStart;
+      // Draw the bright glowing head of the light
+      if (lightHeadPosition > 0 && lightHeadPosition < 1) {
+        const headX = startX + (endX - startX) * lightHeadPosition;
+        const headY = startY + (endY - startY) * lightHeadPosition;
 
-          ctx.beginPath();
-          ctx.moveTo(edgeStartX, edgeStartY);
-          ctx.lineTo(currentEndX, currentEndY);
-          ctx.strokeStyle =
-            theme === "dark"
-              ? `rgba(255, 150, 80, 0.6)`
-              : `rgba(130, 150, 180, 0.6)`;
-          ctx.lineWidth = 2.5;
-          ctx.stroke();
+        // Glow around the head
+        const glowRadius = 8;
+        const glow = ctx.createRadialGradient(
+          headX,
+          headY,
+          0,
+          headX,
+          headY,
+          glowRadius,
+        );
+        if (theme === "dark") {
+          glow.addColorStop(0, "rgba(255, 220, 150, 0.9)");
+          glow.addColorStop(0.5, "rgba(255, 150, 80, 0.4)");
+          glow.addColorStop(1, "rgba(255, 150, 80, 0)");
+        } else {
+          glow.addColorStop(0, "rgba(180, 200, 230, 0.9)");
+          glow.addColorStop(0.5, "rgba(130, 150, 180, 0.4)");
+          glow.addColorStop(1, "rgba(130, 150, 180, 0)");
         }
+
+        ctx.beginPath();
+        ctx.arc(headX, headY, glowRadius, 0, Math.PI * 2);
+        ctx.fillStyle = glow;
+        ctx.fill();
+
+        // Solid bright head
+        ctx.beginPath();
+        ctx.arc(headX, headY, 3, 0, Math.PI * 2);
+        ctx.fillStyle =
+          theme === "dark"
+            ? "rgba(255, 240, 200, 1)"
+            : "rgba(200, 220, 250, 1)";
+        ctx.fill();
       }
 
       // Draw arrowhead only when line is fully drawn
       if (drawProgress >= 0.95) {
         const arrowLength = 8;
         const arrowAngle = Math.PI / 6;
-        const arrowOpacity = drawProgress >= 1 ? 0.25 : activeOpacity;
+        const arrowOpacity = 0.25 * fadeOutOpacity;
 
         ctx.beginPath();
         ctx.moveTo(endX, endY);
         ctx.lineTo(
           endX - arrowLength * Math.cos(angle - arrowAngle),
-          endY - arrowLength * Math.sin(angle - arrowAngle)
+          endY - arrowLength * Math.sin(angle - arrowAngle),
         );
         ctx.moveTo(endX, endY);
         ctx.lineTo(
           endX - arrowLength * Math.cos(angle + arrowAngle),
-          endY - arrowLength * Math.sin(angle + arrowAngle)
+          endY - arrowLength * Math.sin(angle + arrowAngle),
         );
         ctx.strokeStyle =
           theme === "dark"
@@ -424,7 +463,7 @@ export function NeuralNetworkBackground({
       ctx: CanvasRenderingContext2D,
       node: NetworkNode,
       theme: string | undefined,
-      globalPhase: number
+      globalPhase: number,
     ) => {
       // Sequential pulse timing based on layer (continuous flow):
       // input nodes glow at start of cycle
@@ -465,21 +504,21 @@ export function NeuralNetworkBackground({
         0,
         node.x,
         node.y,
-        currentRadius * (1.6 + pulseIntensity * 0.4)
+        currentRadius * (1.6 + pulseIntensity * 0.4),
       );
 
       if (theme === "dark") {
         glowGradient.addColorStop(0, `rgba(249, 115, 22, ${glowOpacity})`);
         glowGradient.addColorStop(
           0.6,
-          `rgba(249, 115, 22, ${glowOpacity * 0.2})`
+          `rgba(249, 115, 22, ${glowOpacity * 0.2})`,
         );
         glowGradient.addColorStop(1, "rgba(249, 115, 22, 0)");
       } else {
         glowGradient.addColorStop(0, `rgba(100, 120, 150, ${glowOpacity})`);
         glowGradient.addColorStop(
           0.6,
-          `rgba(100, 120, 150, ${glowOpacity * 0.2})`
+          `rgba(100, 120, 150, ${glowOpacity * 0.2})`,
         );
         glowGradient.addColorStop(1, "rgba(100, 120, 150, 0)");
       }
@@ -490,7 +529,7 @@ export function NeuralNetworkBackground({
         node.y,
         currentRadius * (1.6 + pulseIntensity * 0.4),
         0,
-        Math.PI * 2
+        Math.PI * 2,
       );
       ctx.fillStyle = glowGradient;
       ctx.fill();
@@ -502,7 +541,7 @@ export function NeuralNetworkBackground({
         0,
         node.x,
         node.y,
-        currentRadius
+        currentRadius,
       );
 
       const nodeOpacity = 0.6 + pulseIntensity * 0.15;
@@ -511,21 +550,21 @@ export function NeuralNetworkBackground({
         nodeGradient.addColorStop(0, `rgba(255, 220, 180, ${nodeOpacity})`);
         nodeGradient.addColorStop(
           0.5,
-          `rgba(255, 180, 120, ${nodeOpacity * 0.9})`
+          `rgba(255, 180, 120, ${nodeOpacity * 0.9})`,
         );
         nodeGradient.addColorStop(
           1,
-          `rgba(249, 115, 22, ${nodeOpacity * 0.8})`
+          `rgba(249, 115, 22, ${nodeOpacity * 0.8})`,
         );
       } else {
         nodeGradient.addColorStop(0, `rgba(180, 190, 210, ${nodeOpacity})`);
         nodeGradient.addColorStop(
           0.5,
-          `rgba(130, 150, 175, ${nodeOpacity * 0.9})`
+          `rgba(130, 150, 175, ${nodeOpacity * 0.9})`,
         );
         nodeGradient.addColorStop(
           1,
-          `rgba(100, 120, 150, ${nodeOpacity * 0.8})`
+          `rgba(100, 120, 150, ${nodeOpacity * 0.8})`,
         );
       }
 
