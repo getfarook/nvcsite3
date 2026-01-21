@@ -157,10 +157,10 @@ export function ContactSection() {
                       NOVIZCO INFOTECH PVT. LTD.
                     </p>
                     <p className="text-sm text-muted-foreground">
-                      B&M Business Center, Kakkanad
+                      3/192, Alpha Tower, Mannarkkad
                     </p>
                     <p className="text-sm text-muted-foreground">
-                      Kochi, India – 682030
+                      Kerala 678582
                     </p>
                   </div>
                 </div>
