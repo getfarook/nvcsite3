@@ -76,7 +76,7 @@ export function ContactSection() {
           setErrors({ name: "", email: "", phone: "", message: "" });
         } else {
           alert(
-            "Something went wrong: " + (data.error || "Failed to send message")
+            "Something went wrong: " + (data.error || "Failed to send message"),
           );
         }
       } catch (error) {
@@ -177,7 +177,7 @@ export function ContactSection() {
                     </label>
                     <Input
                       id="name"
-                      placeholder="Your name"
+                      placeholder="Full name"
                       value={formData.name}
                       onChange={(e) =>
                         setFormData({ ...formData, name: e.target.value })
@@ -213,7 +213,7 @@ export function ContactSection() {
                   <Input
                     id="phone"
                     type="tel"
-                    placeholder="+91 98765 43210"
+                    placeholder="Mobile number"
                     value={formData.phone}
                     onChange={(e) =>
                       setFormData({ ...formData, phone: e.target.value })

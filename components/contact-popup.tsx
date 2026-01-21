@@ -157,7 +157,7 @@ export function ContactPopup({ open, onOpenChange }: ContactPopupProps) {
                   </label>
                   <Input
                     id="popup-name"
-                    placeholder="Your name"
+                    placeholder="Full name"
                     value={formData.name}
                     onChange={(e) =>
                       setFormData({ ...formData, name: e.target.value })
@@ -193,7 +193,7 @@ export function ContactPopup({ open, onOpenChange }: ContactPopupProps) {
                 <Input
                   id="popup-phone"
                   type="tel"
-                  placeholder="+91 98765 43210"
+                  placeholder="Mobile number"
                   value={formData.phone}
                   onChange={(e) =>
                     setFormData({ ...formData, phone: e.target.value })
