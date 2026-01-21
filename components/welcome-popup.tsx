@@ -23,7 +23,7 @@ export default function WelcomePopup() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setOpen(true);
-    }, 5000);
+    }, 10000);
 
     return () => clearTimeout(timer);
   }, []);

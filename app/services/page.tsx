@@ -31,10 +31,10 @@ export default function ServicesPage() {
               </span>
             </h1>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              We deliver full software projects and also provide skilled
-              developers and tech teams on demand. Whether it’s a complete build
-              or ongoing support, we help your business move faster with the
-              right technology.
+              We build technology that powers growth—Mobile Apps, AI Solutions,
+              Full Stack web development, Cloud platforms, and Data Engineering.
+              With Novizco, you get a partner who delivers consistently,
+              transparently, and with long-term trust.
             </p>
             <div className="mt-8">
               <Button

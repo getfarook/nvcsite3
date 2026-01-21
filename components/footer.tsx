@@ -25,10 +25,10 @@ export function Footer() {
               />
               <span className="text-lg font-semibold">{COMPANY.name}</span>
             </div>
-            <p className="text-sm text-muted-foreground max-w-md leading-relaxed">
+            {/* <p className="text-sm text-muted-foreground max-w-md leading-relaxed">
               {COMPANY.description}
-            </p>
-            <div className="flex items-center gap-4 mt-6">
+            </p> */}
+            <div className="flex items-center gap-4 mt-46">
               {socialLinksArray.map((social) => (
                 <a
                   key={social.label}

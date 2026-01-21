@@ -15,7 +15,7 @@ export const AI_LABS_HERO = {
   title: "AI Labs",
   subtitle: "Consulting & Enablement",
   description:
-    "Novizco AI Labs helps teams explore, design, and implement practical AI solutions. We guide businesses through AI strategy, development, and integration—enabling you to adopt and scale AI with confidence.",
+    "Novizco AI Labs helps teams explore, design, and implement AI solutions. We guide businesses through AI strategy, development, and integration - enabling you to adopt and scale AI with confidence.",
 };
 
 export const AI_LABS_FEATURES = [

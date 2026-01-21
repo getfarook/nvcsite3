@@ -60,27 +60,37 @@ export default function AboutPage() {
             {/* Story Content */}
             <div>
               <h2 className="text-2xl sm:text-3xl font-bold mb-6">
-                Transforming businesses since{" "}
-                <span className="text-accent">2019</span>
+                Your Perfect technology partner
               </h2>
               <div className="space-y-5 text-muted-foreground leading-relaxed text-base sm:text-lg">
                 <p>
-                  Founded in 2019, NOVIZCO INFOTECH emerged from a simple yet
-                  powerful vision: to bridge the gap between cutting-edge
-                  technology and real business outcomes. What started as a small
-                  team of passionate developers has grown into a full-service
-                  technology partner serving clients across India and beyond.
+                  Novizco is a software services company specialised in AI
+                  Development, Mobile App, Web App Development, Cloud
+                  Platform Consulting and Data Engineering Solutions. Our expertise in
+                  Application Development, Machine Learning and Cloud Platform
+                  helps us to develop Web and Mobile applications that are
+                  highly scalable, robust and dynamic with Artificial
+                  Intelligence features enabled.
                 </p>
                 <p>
-                  We've built our reputation on delivering excellence. From web
-                  and mobile applications to AI-powered solutions and cloud
-                  infrastructure, we bring expertise, innovation, and dedication
-                  to every project.
+                  In a fast-paced digital world, you need a safe pair of hands
+                  that have the real potential to offer trustworthy solutions
+                  on-time and within your budget. At Novizco, we set significant
+                  success criteria to develop outstanding applications to meet
+                  your corporate goals.
                 </p>
                 <p>
-                  Today, we're proud to be trusted by businesses of all sizes,
-                  helping them leverage technology to grow, compete, and thrive
-                  in the digital age.
+                  Our expertise begins with advanced AI Development that
+                  transforms how businesses operate.
+                  Alongside this, our Flutter-based Mobile App Development
+                  delivers robust, high-performance digital products.The
+                  talented pool of industry experts working with us builds
+                  bespoke and outstanding software solutions by adhering to the
+                  highest standards of quality, performance and timely delivery.
+                  We have an excellent in-house team of AI Engineers, Software
+                  Developers, Creative Designers, Cloud Architects and
+                  Insightful Testers dedicated to upscale your business with
+                  sophisticated skills.
                 </p>
               </div>
 

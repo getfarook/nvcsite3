@@ -454,7 +454,7 @@ export default function CareersPage() {
                     </label>
                     <Input
                       id="fullName"
-                      placeholder="John Doe"
+                      placeholder="Full name"
                       value={formData.fullName}
                       onChange={(e) =>
                         setFormData({ ...formData, fullName: e.target.value })
@@ -473,7 +473,7 @@ export default function CareersPage() {
                     <Input
                       id="email"
                       type="email"
-                      placeholder="john@example.com"
+                      placeholder="your@email.com"
                       value={formData.email}
                       onChange={(e) =>
                         setFormData({ ...formData, email: e.target.value })
@@ -494,7 +494,7 @@ export default function CareersPage() {
                     <Input
                       id="phone"
                       type="tel"
-                      placeholder="+91 98765 43210"
+                      placeholder="Mobile number"
                       value={formData.phone}
                       onChange={(e) =>
                         setFormData({ ...formData, phone: e.target.value })
@@ -512,7 +512,7 @@ export default function CareersPage() {
                     </label>
                     <Input
                       id="jobTitle"
-                      placeholder="Position you're applying for"
+                      placeholder="Position applying for"
                       value={formData.jobTitle}
                       onChange={(e) =>
                         setFormData({ ...formData, jobTitle: e.target.value })
@@ -531,7 +531,7 @@ export default function CareersPage() {
                   </label>
                   <Input
                     id="experience"
-                    placeholder="e.g., 3 years"
+                    placeholder="Years of experience"
                     value={formData.experience}
                     onChange={(e) =>
                       setFormData({ ...formData, experience: e.target.value })
@@ -549,7 +549,7 @@ export default function CareersPage() {
                   </label>
                   <Textarea
                     id="description"
-                    placeholder="Tell us about yourself and why you'd be a great fit..."
+                    placeholder="Tell us about yourself..."
                     rows={4}
                     value={formData.description}
                     onChange={(e) =>

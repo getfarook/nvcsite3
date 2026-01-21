@@ -211,7 +211,7 @@ export default function HireResourcePage() {
                     </label>
                     <Input
                       id="name"
-                      placeholder="John Doe"
+                      placeholder="Full name"
                       value={formData.name}
                       onChange={handleChange}
                     />
@@ -229,7 +229,7 @@ export default function HireResourcePage() {
                       <Input
                         id="email"
                         type="email"
-                        placeholder="john@company.com"
+                        placeholder="your@email.com"
                         className={`pl-9 ${
                           emailError
                             ? "border-destructive focus-visible:ring-destructive"
@@ -258,7 +258,7 @@ export default function HireResourcePage() {
                       <Input
                         id="phone"
                         type="tel"
-                        placeholder="+1 (555) 000-0000"
+                        placeholder="Mobile number"
                         className="pl-9"
                         value={formData.phone}
                         onChange={handleChange}
@@ -287,7 +287,7 @@ export default function HireResourcePage() {
                     </label>
                     <Input
                       id="title"
-                      placeholder="e.g. Senior React Developer"
+                      placeholder="Job title / Role needed"
                       value={formData.title}
                       onChange={handleChange}
                     />
@@ -306,7 +306,7 @@ export default function HireResourcePage() {
                         id="experience"
                         type="number"
                         min="0"
-                        placeholder="e.g. 5"
+                        placeholder="Years required"
                         className="pl-9"
                         value={formData.experience}
                         onChange={handleChange}
@@ -324,7 +324,7 @@ export default function HireResourcePage() {
                   </label>
                   <Textarea
                     id="description"
-                    placeholder="We are looking for an experienced developer to help us with..."
+                    placeholder="Tell us about your requirements..."
                     className="min-h-[150px]"
                     value={formData.description}
                     onChange={handleChange}

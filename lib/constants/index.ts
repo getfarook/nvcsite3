@@ -164,11 +164,11 @@ export const HERO = {
 export const SCROLL_REVEAL = {
   sections: [
     {
-      text: "Trusted by global partners for securescalable,",
+      text: "Trusted by global partners for ",
       speed: 1.7, // normal speed
     },
     {
-      text: " and high-quality software solutions.",
+      text: "high-quality software solutions.",
       speed: 3.2, // faster speed
     },
     {
