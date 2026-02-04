@@ -104,7 +104,7 @@ export const SOCIAL_LINKS = {
 export const FOOTER = {
   quickLinks: [
     { label: "Services", href: "/services" },
-    {label: "AI Labs", href:"/ai-labs"},
+    { label: "AI Labs", href: "/ai-labs" },
     { label: "About Us", href: "/about" },
     { label: "Careers", href: "/careers" },
     { label: "Contact", href: "/contact" },
@@ -133,7 +133,7 @@ export const HERO = {
     highlight: "Technology Solutions",
   },
   description:
-    "Novizco is an AI-driven full-stack technology company. We help our clients build, test, and evaluate AI-enabled web and mobile applications. We also provide data engineering and cloud solutions on Azure, AWS, and GCP. At Novizco, we deliver end-to-end projects or fully managed resources based on customer needs.",
+    "Novizco is an AI-driven full-stack technology services company. We help our clients build, test, and evaluate AI-enabled web and mobile applications. We also provide Data Engineering and Cloud Solutions on Azure, AWS, and GCP. At Novizco, we deliver end-to-end projects or fully managed resources based on customer needs.",
   ctas: [
     {
       label: "Contact us",
@@ -168,11 +168,11 @@ export const SCROLL_REVEAL = {
       speed: 1.7, // normal speed
     },
     {
-      text: "high-quality software solutions.",
+      text: "high-quality software solutions. ",
       speed: 3.2, // faster speed
     },
     {
-      text: "We help teams innovate at the right pace.",
+      text: "We help our clients innovate and accelerate their business with AI-driven technology solutions.",
       speed: 1.7, // normal speed
     },
   ],
@@ -214,7 +214,7 @@ export const SERVICES = {
         "Flutter Apps (Android, iOS, Web)",
         "React Native Apps",
         "Native Android & iOS (Kotlin, Swift)",
-        "API & Backend Integration",
+        "API & Backend Development",
         "DevOps & Deployment",
         "Post-Production Support",
       ],
@@ -236,27 +236,28 @@ export const SERVICES = {
       icon: Brain,
       title: "AI Evaluation & Red-Teaming",
       description:
-        "We test and evaluate AI systems before they go live. With evaluation and red-teaming, we uncover risks and make sure the AI is safe and reliable.",
+        "We design and implement evaluation and red-teaming frameworks that systematically measure model behavior, risk exposure, and policy adherence across normal, adversarial, and edge-case scenarios throughout the AI lifecycle.",
       features: [
         "AI Model Evaluation",
         "Prompt & Response Testing",
-        "Bias & Safety Assessment",
-        "Red-Teaming",
-        "Latency & Performance",
+        "Bias, Safety & Risk Assessment",
+        "Red-Teaming & Adversarial Testing",
+        "Performance, Latency & Cost Analysis",
+        "Compliance & Responsible AI Checks",
       ],
     },
     {
       icon: Cloud,
       title: "Cloud Engineering",
       description:
-        "We manage cloud setups that help your apps run reliably. We ensure strong performance, good security, and efficient cloud spending.",
+        "We manage cloud infrastructure that helps your apps run reliably. We ensure strong performance, good security, and efficient cloud spending.",
       features: [
         "AWS, Azure & GCP",
-        "Cloud Architecture",
+        "Cloud Architecture Design",
         "DevOps & CI/CD",
-        "Containerization",
+        "Containerization & Orchestration",
         "Cloud Migration",
-        "Monitoring & Cost Optimization",
+        "Monitoring, Security & Cost Optimization",
       ],
     },
     {
@@ -269,7 +270,7 @@ export const SERVICES = {
         "ETL / ELT Workflows",
         "Data Warehousing & Modeling",
         "Azure Data Engineering",
-        "GCP Data flow and AWS Glue",
+        "AWS (Glue, EMR) | GCP (Dataflow, BigQuery)",
       ],
     },
   ],
