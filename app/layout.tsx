@@ -5,6 +5,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { ScatteredBackground } from "@/components/scattered-background";
 import { NeuralNetworkSideMargins } from "@/components/neural-network-margin";
 import { ThemeProvider } from "@/components/theme-provider";
+import { GoogleTagManager } from '@next/third-parties/google'
 import WelcomePopup from "@/components/welcome-popup";
 import "./globals.css";
 
@@ -108,6 +109,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GA_ID} gtmScriptUrl="https://www.googletagmanager.com/gtag/js" />
       <body className={`font-sans antialiased`}>
         <ThemeProvider
           attribute="class"
@@ -118,8 +120,8 @@ export default function RootLayout({
           <ScatteredBackground />
           <NeuralNetworkSideMargins />
           <div className="">{children}</div>
-          <WelcomePopup />
-          <Analytics />
+          {/* <WelcomePopup /> */}
+          <Analytics  />
         </ThemeProvider>
       </body>
     </html>
