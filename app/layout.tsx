@@ -121,10 +121,10 @@ export default function RootLayout({
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-              gtag('config', ${'${process.env.NEXT_PUBLIC_GA_ID}'});
               gtag('config', 'G-9FSXF41CBZ');
           `}
         </Script>
+                      {/* gtag('config', ${'${process.env.NEXT_PUBLIC_GA_ID}'}); */}
       <body className={`font-sans antialiased`}>
         <ThemeProvider
           attribute="class"
