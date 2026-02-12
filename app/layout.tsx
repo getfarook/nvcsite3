@@ -5,9 +5,10 @@ import { Analytics } from "@vercel/analytics/next";
 import { ScatteredBackground } from "@/components/scattered-background";
 import { NeuralNetworkSideMargins } from "@/components/neural-network-margin";
 import { ThemeProvider } from "@/components/theme-provider";
-import { GoogleTagManager } from '@next/third-parties/google'
+// import { GoogleTagManager } from '@next/third-parties/google'
 import WelcomePopup from "@/components/welcome-popup";
 import "./globals.css";
+import Script from "next/script";
 
 const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
@@ -109,7 +110,21 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GA_ID} gtmScriptUrl="https://www.googletagmanager.com/gtag/js" />
+      {/* <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GA_ID} gtmScriptUrl="https://www.googletagmanager.com/gtag/js" /> */}
+     <Script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-9FSXF41CBZ"
+        />
+
+        <Script id="google-analytics">
+          {`
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', ${'${process.env.NEXT_PUBLIC_GA_ID}'});
+              gtag('config', 'G-9FSXF41CBZ');
+          `}
+        </Script>
       <body className={`font-sans antialiased`}>
         <ThemeProvider
           attribute="class"
