@@ -4,11 +4,7 @@ import {
   BlogListResponse,
   BlogPostResponse,
 } from "@/lib/types/blog";
-import {
-  BLOG_POST_SUMMARIES,
-  BLOG_POST_CONTENT,
-  DEFAULT_BLOG_POST_CONTENT,
-} from "@/lib/constants/blog";
+import { BLOG_POSTS, renderContent } from "@/lib/constants/blog";
 
 /**
  * Blog Service
@@ -35,16 +31,24 @@ export async function getBlogPosts(
   page: number = 1,
   pageSize: number = 10
 ): Promise<BlogListResponse> {
-  // Simulate API delay (remove in production)
-  // await new Promise(resolve => setTimeout(resolve, 100));
+  const summaries: BlogPostSummary[] = BLOG_POSTS.map(
+    ({ slug, title, excerpt, date, imageUrl, category, readTime }) => ({
+      slug,
+      title,
+      excerpt,
+      date,
+      imageUrl,
+      category,
+      readTime,
+    })
+  );
 
   const start = (page - 1) * pageSize;
-  const end = start + pageSize;
-  const paginatedPosts = BLOG_POST_SUMMARIES.slice(start, end);
+  const paginatedPosts = summaries.slice(start, start + pageSize);
 
   return {
     posts: paginatedPosts,
-    total: BLOG_POST_SUMMARIES.length,
+    total: summaries.length,
     page,
     pageSize,
   };
@@ -62,30 +66,22 @@ export async function getBlogPosts(
 export async function getBlogPostBySlug(
   slug: string
 ): Promise<BlogPostResponse> {
-  // Simulate API delay (remove in production)
-  // await new Promise(resolve => setTimeout(resolve, 100));
+  const raw = BLOG_POSTS.find((post) => post.slug === slug);
 
-  // Find the summary data
-  const summary = BLOG_POST_SUMMARIES.find((post) => post.slug === slug);
-
-  if (!summary) {
+  if (!raw) {
     return { post: null };
   }
 
-  // Get the content (or use default)
-  const contentData = BLOG_POST_CONTENT[slug] || DEFAULT_BLOG_POST_CONTENT;
-
-  // Combine summary and content to form full post
   const post: BlogPost = {
-    slug: summary.slug,
-    title: summary.title,
-    date: summary.date,
-    imageUrl: summary.imageUrl,
-    category: summary.category,
-    readTime: summary.readTime,
-    excerpt: summary.excerpt,
-    author: contentData.author,
-    content: contentData.content,
+    slug: raw.slug,
+    title: raw.title,
+    excerpt: raw.excerpt,
+    date: raw.date,
+    imageUrl: raw.imageUrl,
+    category: raw.category,
+    readTime: raw.readTime,
+    author: raw.author,
+    content: renderContent(raw.content),
   };
 
   return { post };
@@ -96,11 +92,9 @@ export async function getBlogPostBySlug(
  *
  * @param slug - The blog post slug
  * @returns Promise<boolean>
- *
- * TODO: Replace with API call or use getBlogPostBySlug
  */
 export async function blogPostExists(slug: string): Promise<boolean> {
-  return BLOG_POST_SUMMARIES.some((post) => post.slug === slug);
+  return BLOG_POSTS.some((post) => post.slug === slug);
 }
 
 /**
@@ -112,5 +106,5 @@ export async function blogPostExists(slug: string): Promise<boolean> {
  * Example: return fetch('/api/blog/slugs').then(res => res.json());
  */
 export async function getAllBlogSlugs(): Promise<string[]> {
-  return BLOG_POST_SUMMARIES.map((post) => post.slug);
+  return BLOG_POSTS.map((post) => post.slug);
 }

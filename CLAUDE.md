@@ -56,9 +56,28 @@ Static content (services, blog posts, careers, team info, etc.) lives in `/lib/c
 - Dark/light mode via `next-themes` (`ThemeProvider` in root layout)
 - CSS variable-based theming; use `cn()` from `lib/utils` for conditional class merging
 
+### Fonts
+
+- **SonySketch** (`public/Sony_Sketch_EF.ttf`) is registered as `font-family: "SonySketch"` in `app/globals.css` via `@font-face` — use `style={{ fontFamily: "SonySketch" }}` inline to apply it; no Tailwind class exists for it
+- Body font is `font-sans` (Geist) loaded via `next/font/google` in `app/layout.tsx`
+
+### Background Components
+
+There are three pairs of animated background components — a full-page version and a side-margin version for each style:
+
+| Full-page | Side-margin | Used on |
+|---|---|---|
+| `NeuralNetworkBackground` | `NeuralNetworkSideMargins` (`neural-network-margin.tsx`) | Most pages + hero |
+| `ScatteredBackground` | — | Root layout (all pages, fixed) |
+| `AINodesBackground` | `AINodesMargin` (`ai-nodes-margin.tsx`) | — |
+
+- `NeuralNetworkBackground` accepts `spreadNearText?: boolean` — when `true`, shrinks the center exclusion zone so networks drift closer to text content
+- `ScatteredBackground` is purely static (CSS blur glows, no animation, no canvas)
+- All canvas-based components use `requestAnimationFrame` and clean up via the `useEffect` return
+
 ### Notable Patterns
 
 - `next.config.mjs` disables image optimization (`unoptimized: true`) and ignores TypeScript build errors — do not rely on build errors catching type issues
 - **Google Analytics** is loaded via inline `<script>` tags in `app/layout.tsx` (not via GTM component)
-- Custom animated background components (`NeuralNetworkBackground`, `ScatteredBackground`, `AINodesBackground`) are used across pages for visual effect
 - Popup modals (`WelcomePopup`, `ContactPopup`) use `useState` with localStorage to control display frequency
+- The navbar logo renders "NOVIZCO / INFOTECH" as two `<span>` elements with `fontFamily: "SonySketch"` and manual `letterSpacing` to match widths — avoid changing font size without recalculating letter-spacing
