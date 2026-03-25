@@ -42,12 +42,13 @@ export function Navbar() {
             <Image
               src={COMPANY.logo}
               alt={COMPANY.name}
-              width={40}
-              height={40}
+              width={60}
+              height={60}
               className="rounded-md"
             />
-            <span className="text-lg font-semibold tracking-tight">
-              {COMPANY.name}
+            <span className="flex flex-col" style={{ fontFamily: "SonySketch", lineHeight: 1 }}>
+              <span className="text-2xl text-[#4ecdc4] tracking-widest" style={{ lineHeight: 1 }}>NOVIZCO</span>
+              <span className="text-[#4ecdc4]" style={{ lineHeight: 1, letterSpacing: "0.22em", fontSize: "1.120rem" }}>INFOTECH</span>
             </span>
           </Link>
 

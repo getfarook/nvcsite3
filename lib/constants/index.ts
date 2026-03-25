@@ -29,7 +29,7 @@ import PytorchLogo from "@/components/icons/pytorch.svg";
  */
 export const COMPANY = {
   name: "NOVIZCO INFOTECH",
-  logo: "/images/novizco-logo.png",
+  logo: "/images/logo.png",
   tagline: "Technology Solutions & Innovation",
   description:
     "Novizco is an AI-driven full-stack technology company offering AI development, evaluation, red-teaming, web and mobile app development, data engineering, cloud services, and production support. We work with clients across many industries to deliver reliable, scalable technology built for real-world use.",

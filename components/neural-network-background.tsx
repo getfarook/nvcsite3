@@ -10,8 +10,6 @@ interface NetworkNode {
   baseY: number;
   radius: number;
   layer: "input" | "hidden" | "output";
-  pulsePhase: number;
-  pulseSpeed: number;
   wobblePhaseX: number;
   wobblePhaseY: number;
   wobbleSpeedX: number;
@@ -28,6 +26,7 @@ interface NeuralNetwork {
   scale: number;
   rotation: number;
   rotationSpeed: number;
+  phaseOffset: number;
 }
 
 interface NeuralNetworkBackgroundProps {
@@ -64,6 +63,7 @@ export function NeuralNetworkBackground({
       centerX: number,
       centerY: number,
       scale: number,
+      phaseOffset: number,
     ): NeuralNetwork => {
       const nodes: NetworkNode[] = [];
 
@@ -96,8 +96,6 @@ export function NeuralNetworkBackground({
             baseY: localY,
             radius: nodeRadius,
             layer: layer.name,
-            pulsePhase: Math.random() * Math.PI * 2,
-            pulseSpeed: 0.03 + Math.random() * 0.02,
             wobblePhaseX: Math.random() * Math.PI * 2,
             wobblePhaseY: Math.random() * Math.PI * 2,
             wobbleSpeedX: 0.02 + Math.random() * 0.015,
@@ -116,6 +114,7 @@ export function NeuralNetworkBackground({
         scale,
         rotation: 0,
         rotationSpeed: (Math.random() - 0.5) * 0.0008,
+        phaseOffset,
       };
     };
 
@@ -206,7 +205,8 @@ export function NeuralNetworkBackground({
         y = Math.max(padding, Math.min(height - padding, y));
 
         const scale = 0.4 + Math.random() * 0.7; // More varied size (0.4 to 1.1)
-        networks.push(createNetwork(x, y, scale));
+        const phaseOffset = Math.random();
+        networks.push(createNetwork(x, y, scale, phaseOffset));
       }
 
       networksRef.current = networks;
@@ -319,7 +319,6 @@ export function NeuralNetworkBackground({
           // Apply base position + rotation + wobble
           node.x = network.x + node.baseX * cos - node.baseY * sin + wobbleX;
           node.y = network.y + node.baseX * sin + node.baseY * cos + wobbleY;
-          node.pulsePhase += node.pulseSpeed;
         });
 
         // Get nodes by layer
@@ -327,10 +326,9 @@ export function NeuralNetworkBackground({
         const hiddenNodes = network.nodes.filter((n) => n.layer === "hidden");
         const outputNodes = network.nodes.filter((n) => n.layer === "output");
 
-        // Calculate global pulse phase for this network (cycles through 0-1)
-        // Full cycle: input(0-0.2) -> line1(0.2-0.4) -> hidden(0.4-0.6) -> line2(0.6-0.8) -> output(0.8-1.0)
-        const cycleSpeed = 0.003;
-        const globalPhase = (timeRef.current * cycleSpeed) % 1;
+        // Per-network phase with individual offset so each network animates independently
+        const cycleSpeed = 0.006;
+        const globalPhase = (timeRef.current * cycleSpeed + network.phaseOffset) % 1;
 
         // Draw connections: Input -> Hidden
         inputNodes.forEach((inputNode) => {
@@ -379,65 +377,35 @@ export function NeuralNetworkBackground({
     ) => {
       const angle = Math.atan2(to.y - from.y, to.x - from.x);
 
-      // Calculate start and end points at node edges
       const startX = from.x + Math.cos(angle) * from.radius;
       const startY = from.y + Math.sin(angle) * from.radius;
       const endX = to.x - Math.cos(angle) * to.radius;
       const endY = to.y - Math.sin(angle) * to.radius;
 
-      // Continuous light flow timing:
-      // The light travels from input -> hidden -> output as one continuous journey
-      // Phase 0-0.45: light travels through input-hidden connections
-      // Phase 0.45-0.9: light travels through hidden-output connections
-      // Phase 0.9-1.0: everything fades out after reaching output
-
-      let drawProgress = 0; // 0 to 1, how much of the line is drawn (bright)
-      let lightHeadPosition = -1; // Position of the light head on this segment
-      let fadeOutOpacity = 1; // For fading out at the end
+      let drawProgress = 0;
+      let isActive = false;
 
       if (connectionType === "input-hidden") {
-        if (globalPhase <= 0.45) {
-          // Light is traveling through this segment
-          drawProgress = globalPhase / 0.45;
-          lightHeadPosition = drawProgress;
-        } else if (globalPhase <= 0.9) {
-          // Light has passed through, line stays fully bright
-          drawProgress = 1;
+        if (globalPhase <= 0.5) {
+          drawProgress = globalPhase / 0.5;
+          isActive = true;
         } else {
-          // Fade out phase after reaching output
           drawProgress = 1;
-          fadeOutOpacity = 1 - (globalPhase - 0.9) / 0.1;
         }
       } else {
-        // hidden-output
-        if (globalPhase < 0.45) {
-          // Light hasn't reached this segment yet
-          drawProgress = 0;
-        } else if (globalPhase <= 0.9) {
-          // Light is traveling through this segment
-          drawProgress = (globalPhase - 0.45) / 0.45;
-          lightHeadPosition = drawProgress;
-        } else {
-          // Fade out phase after reaching output
-          drawProgress = 1;
-          fadeOutOpacity = 1 - (globalPhase - 0.9) / 0.1;
+        if (globalPhase >= 0.5) {
+          drawProgress = (globalPhase - 0.5) / 0.5;
+          isActive = true;
         }
       }
 
-      // Clamp values
-      drawProgress = Math.max(0, Math.min(1, drawProgress));
-      fadeOutOpacity = Math.max(0, Math.min(1, fadeOutOpacity));
-
-      // Calculate the current end point based on draw progress
       const currentEndX = startX + (endX - startX) * drawProgress;
       const currentEndY = startY + (endY - startY) * drawProgress;
 
-      // Base opacity (faint line always visible)
-      const baseOpacity = 0.08;
-      // Bright opacity for the drawn/lit portion
-      const brightOpacity = 0.5 * fadeOutOpacity;
+      const baseOpacity = 0.06;
+      const activeOpacity = drawProgress > 0 ? 0.25 : 0.06;
 
-      // Draw the base line (faint, full length) - always visible
+      // Base faint line
       ctx.beginPath();
       ctx.moveTo(startX, startY);
       ctx.lineTo(endX, endY);
@@ -445,85 +413,38 @@ export function NeuralNetworkBackground({
         theme === "dark"
           ? `rgba(249, 115, 22, ${baseOpacity})`
           : `rgba(100, 120, 150, ${baseOpacity})`;
-      ctx.lineWidth = 1;
+      ctx.lineWidth = 0.8;
       ctx.stroke();
 
-      // Draw the bright lit portion of the line (stays bright once drawn)
+      // Active portion
       if (drawProgress > 0) {
         ctx.beginPath();
         ctx.moveTo(startX, startY);
         ctx.lineTo(currentEndX, currentEndY);
         ctx.strokeStyle =
           theme === "dark"
-            ? `rgba(255, 150, 80, ${brightOpacity})`
-            : `rgba(130, 150, 180, ${brightOpacity})`;
-        ctx.lineWidth = 2.5;
+            ? `rgba(249, 115, 22, ${activeOpacity})`
+            : `rgba(100, 120, 150, ${activeOpacity})`;
+        ctx.lineWidth = 2;
         ctx.stroke();
-      }
 
-      // Draw the bright glowing head of the light
-      if (lightHeadPosition > 0 && lightHeadPosition < 1) {
-        const headX = startX + (endX - startX) * lightHeadPosition;
-        const headY = startY + (endY - startY) * lightHeadPosition;
+        // Bright leading edge
+        if (isActive && drawProgress > 0.02 && drawProgress < 0.98) {
+          const edgeLength = 0.08;
+          const edgeStart = Math.max(0, drawProgress - edgeLength);
+          const edgeStartX = startX + (endX - startX) * edgeStart;
+          const edgeStartY = startY + (endY - startY) * edgeStart;
 
-        // Glow around the head
-        const glowRadius = 8;
-        const glow = ctx.createRadialGradient(
-          headX,
-          headY,
-          0,
-          headX,
-          headY,
-          glowRadius,
-        );
-        if (theme === "dark") {
-          glow.addColorStop(0, "rgba(255, 220, 150, 0.9)");
-          glow.addColorStop(0.5, "rgba(255, 150, 80, 0.4)");
-          glow.addColorStop(1, "rgba(255, 150, 80, 0)");
-        } else {
-          glow.addColorStop(0, "rgba(180, 200, 230, 0.9)");
-          glow.addColorStop(0.5, "rgba(130, 150, 180, 0.4)");
-          glow.addColorStop(1, "rgba(130, 150, 180, 0)");
+          ctx.beginPath();
+          ctx.moveTo(edgeStartX, edgeStartY);
+          ctx.lineTo(currentEndX, currentEndY);
+          ctx.strokeStyle =
+            theme === "dark"
+              ? `rgba(255, 150, 80, 0.45)`
+              : `rgba(130, 150, 180, 0.45)`;
+          ctx.lineWidth = 2;
+          ctx.stroke();
         }
-
-        ctx.beginPath();
-        ctx.arc(headX, headY, glowRadius, 0, Math.PI * 2);
-        ctx.fillStyle = glow;
-        ctx.fill();
-
-        // Solid bright head
-        ctx.beginPath();
-        ctx.arc(headX, headY, 3, 0, Math.PI * 2);
-        ctx.fillStyle =
-          theme === "dark"
-            ? "rgba(255, 240, 200, 1)"
-            : "rgba(200, 220, 250, 1)";
-        ctx.fill();
-      }
-
-      // Draw arrowhead only when line is fully drawn
-      if (drawProgress >= 0.95) {
-        const arrowLength = 8;
-        const arrowAngle = Math.PI / 6;
-        const arrowOpacity = 0.25 * fadeOutOpacity;
-
-        ctx.beginPath();
-        ctx.moveTo(endX, endY);
-        ctx.lineTo(
-          endX - arrowLength * Math.cos(angle - arrowAngle),
-          endY - arrowLength * Math.sin(angle - arrowAngle),
-        );
-        ctx.moveTo(endX, endY);
-        ctx.lineTo(
-          endX - arrowLength * Math.cos(angle + arrowAngle),
-          endY - arrowLength * Math.sin(angle + arrowAngle),
-        );
-        ctx.strokeStyle =
-          theme === "dark"
-            ? `rgba(249, 115, 22, ${arrowOpacity})`
-            : `rgba(100, 120, 150, ${arrowOpacity})`;
-        ctx.lineWidth = 1.5;
-        ctx.stroke();
       }
     };
 
@@ -533,124 +454,59 @@ export function NeuralNetworkBackground({
       theme: string | undefined,
       globalPhase: number,
     ) => {
-      // Sequential pulse timing based on layer (continuous flow):
-      // input nodes glow at start of cycle
-      // hidden nodes glow at midpoint when first lines complete
-      // output nodes glow at end when second lines complete
-      let pulseIntensity = 0;
+      // Global fade-out: everything dims together once output nodes are lit
+      const fadeOut = globalPhase >= 0.95
+        ? Math.max(0, 1 - (globalPhase - 0.95) / 0.05)
+        : 1;
+
+      let lit = 0;
       if (node.layer === "input") {
-        // Active at the very start (0-0.1)
-        if (globalPhase <= 0.1) {
-          const localPhase = globalPhase / 0.1;
-          pulseIntensity = Math.sin(localPhase * Math.PI);
-        }
+        lit = globalPhase <= 0.1 ? globalPhase / 0.1 : 1;
       } else if (node.layer === "hidden") {
-        // Active at midpoint (0.45-0.55)
-        if (globalPhase >= 0.45 && globalPhase <= 0.55) {
-          const localPhase = (globalPhase - 0.45) / 0.1;
-          pulseIntensity = Math.sin(localPhase * Math.PI);
-        }
+        lit = globalPhase < 0.45 ? 0 : Math.min(1, (globalPhase - 0.45) / 0.1);
       } else {
-        // output: Active at the end (0.9-1.0)
-        if (globalPhase >= 0.9) {
-          const localPhase = (globalPhase - 0.9) / 0.1;
-          pulseIntensity = Math.sin(localPhase * Math.PI);
-        }
+        lit = globalPhase < 0.9 ? 0 : Math.min(1, (globalPhase - 0.9) / 0.05);
       }
 
-      const baseScale = 1 + Math.sin(node.pulsePhase) * 0.02;
-      const pulseScale = baseScale + pulseIntensity * 0.05;
-      const currentRadius = node.radius * pulseScale;
+      const pulseIntensity = lit * fadeOut;
 
-      // Outer glow - very subtle intensity
-      const baseGlowOpacity = 0.05;
-      const glowOpacity = baseGlowOpacity + pulseIntensity * 0.1;
+      const currentRadius = node.radius * (1 + pulseIntensity * 0.05);
 
+      // Glow
+      const glowOpacity = 0.04 + pulseIntensity * 0.08;
       const glowGradient = ctx.createRadialGradient(
         node.x,
         node.y,
         0,
         node.x,
         node.y,
-        currentRadius * (1.6 + pulseIntensity * 0.4),
+        currentRadius * (1.5 + pulseIntensity * 0.3),
       );
 
       if (theme === "dark") {
         glowGradient.addColorStop(0, `rgba(249, 115, 22, ${glowOpacity})`);
-        glowGradient.addColorStop(
-          0.6,
-          `rgba(249, 115, 22, ${glowOpacity * 0.2})`,
-        );
         glowGradient.addColorStop(1, "rgba(249, 115, 22, 0)");
       } else {
         glowGradient.addColorStop(0, `rgba(100, 120, 150, ${glowOpacity})`);
-        glowGradient.addColorStop(
-          0.6,
-          `rgba(100, 120, 150, ${glowOpacity * 0.2})`,
-        );
         glowGradient.addColorStop(1, "rgba(100, 120, 150, 0)");
       }
 
       ctx.beginPath();
-      ctx.arc(
-        node.x,
-        node.y,
-        currentRadius * (1.6 + pulseIntensity * 0.4),
-        0,
-        Math.PI * 2,
-      );
+      ctx.arc(node.x, node.y, currentRadius * (1.5 + pulseIntensity * 0.3), 0, Math.PI * 2);
       ctx.fillStyle = glowGradient;
+
       ctx.fill();
 
-      // Main node with gradient
-      const nodeGradient = ctx.createRadialGradient(
-        node.x - currentRadius * 0.3,
-        node.y - currentRadius * 0.3,
-        0,
-        node.x,
-        node.y,
-        currentRadius,
-      );
-
-      const nodeOpacity = 0.6 + pulseIntensity * 0.15;
-
-      if (theme === "dark") {
-        nodeGradient.addColorStop(0, `rgba(255, 220, 180, ${nodeOpacity})`);
-        nodeGradient.addColorStop(
-          0.5,
-          `rgba(255, 180, 120, ${nodeOpacity * 0.9})`,
-        );
-        nodeGradient.addColorStop(
-          1,
-          `rgba(249, 115, 22, ${nodeOpacity * 0.8})`,
-        );
-      } else {
-        nodeGradient.addColorStop(0, `rgba(180, 190, 210, ${nodeOpacity})`);
-        nodeGradient.addColorStop(
-          0.5,
-          `rgba(130, 150, 175, ${nodeOpacity * 0.9})`,
-        );
-        nodeGradient.addColorStop(
-          1,
-          `rgba(100, 120, 150, ${nodeOpacity * 0.8})`,
-        );
-      }
-
+      // Main node
+      const nodeOpacity = 0.2 + pulseIntensity * 0.25;
+      console.log(nodeOpacity, 'opacity');
       ctx.beginPath();
       ctx.arc(node.x, node.y, currentRadius, 0, Math.PI * 2);
-      ctx.fillStyle = nodeGradient;
-      ctx.fill();
-
-      // Node border - subtle when pulsing
-      const borderOpacity = 0.3 + pulseIntensity * 0.2;
-      ctx.beginPath();
-      ctx.arc(node.x, node.y, currentRadius, 0, Math.PI * 2);
-      ctx.strokeStyle =
+      ctx.fillStyle =
         theme === "dark"
-          ? `rgba(200, 100, 50, ${borderOpacity})`
-          : `rgba(80, 100, 130, ${borderOpacity})`;
-      ctx.lineWidth = 1.5 + pulseIntensity * 0.5;
-      ctx.stroke();
+          ? `rgba(249, 115, 22, ${nodeOpacity})`
+          : `rgba(100, 120, 150, ${nodeOpacity})`;
+      ctx.fill();
     };
 
     window.addEventListener("resize", resize);
