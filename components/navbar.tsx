@@ -29,26 +29,28 @@ export function Navbar() {
 
   return (
     <nav
-      className={`fixed shadow-sm top-0 left-0 right-0 z-50 ${THEME.navbar.border} ${THEME.navbar.background}`}
+      className={`fixed shadow-sm top-0 left-0 right-0 z-50 ${THEME.navbar.border} ${THEME.navbar.background} bg-linear-to-r from-[#4ecdc4]/20 via-[#6c63ff]/10 to-white dark:bg-none dark:from-transparent dark:via-transparent dark:to-transparent`}
     >
       <div className={`${THEME.spacing.container} ${THEME.spacing.section.px}`}>
         <div
-          className={`flex ${THEME.navbar.height} items-center justify-between`}
+          className={`flex ${THEME.navbar.height} md:h-auto items-center justify-between py-2 md:py-3`}
         >
           <Link
             href="/"
             className="flex items-center gap-3 hover:opacity-80 transition-opacity"
           >
-            <Image
-              src={COMPANY.logo}
-              alt={COMPANY.name}
-              width={60}
-              height={60}
-              className="rounded-md"
-            />
+            {/* Mobile: 60px, Desktop: 80px */}
+            <div className="w-[60px] h-[60px] md:w-[60px] md:h-[60px] relative shrink-0">
+              <Image
+                src={COMPANY.logo}
+                alt={COMPANY.name}
+                fill
+                className="rounded-md object-contain"
+              />
+            </div>
             <span className="flex flex-col" style={{ fontFamily: "SonySketch", lineHeight: 1 }}>
               <span className="text-2xl text-[#4ecdc4] tracking-widest" style={{ lineHeight: 1 }}>NOVIZCO</span>
-              <span className="text-[#4ecdc4]" style={{ lineHeight: 1, letterSpacing: "0.22em", fontSize: "1.120rem" }}>INFOTECH</span>
+              <span className="text-[1.140rem] text-[#4ecdc4]" style={{ lineHeight: 1, letterSpacing: "0.2em" }}>INFOTECH</span>
             </span>
           </Link>
 

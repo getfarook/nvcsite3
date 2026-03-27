@@ -41,7 +41,6 @@ export default function BlogPage() {
           <div className="relative z-10 mx-auto max-w-7xl mt-16">
             <div className="text-center space-y-4">
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-6 text-balance">
-                Our{" "}
                 <span className="bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent">
                   Blog
                 </span>
@@ -56,7 +55,7 @@ export default function BlogPage() {
 
         {/* Blog Grid Section */}
         <section
-          className={`${THEME.spacing.section.py} ${THEME.spacing.section.px}`}
+          className={`${THEME.spacing.section.py} ${THEME.spacing.section.px} pt-0`}
         >
           <div className={THEME.spacing.container}>
             {/* Blog Grid */}
